@@ -6,9 +6,6 @@
     <title>سنی گرافیک</title>
     
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;700&display=swap" rel="stylesheet">
 
     <style>
@@ -17,29 +14,22 @@
             --menu-color: #ffffff;
             --اصفر: #FFD700;
             --font-main: 'Vazirmatn', sans-serif;
-            --icon-size: 26px; 
         }
 
         body {
             background: var(--bg-body);
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
             font-family: var(--font-main);
             color: white;
-            -webkit-tap-highlight-color: transparent;
+            overflow: hidden; /* جلوگیری از اسکرول کل صفحه */
         }
 
         .content-area {
-            flex: 1;
+            height: calc(100vh - 80px); /* فضا برای منوی پایین */
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* تغییر برای اسکرول بهتر */
+            align-items: center;
             padding: 20px;
-            padding-bottom: 100px;
-            margin-top: 10px;
         }
 
         .card {
@@ -50,216 +40,93 @@
             border-right: 5px solid var(--اصفر); 
             padding: 25px;
             border-radius: 24px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            width: 85%;
+            max-width: 380px;
             display: none;
-            animation: popIn 0.4s ease-out forwards;
+            animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48) forwards;
         }
 
         .card.active { display: block; }
 
-        .card h2 { color: var(--اصفر); font-size: 1.5rem; margin: 0 0 15px 0; text-align: right; }
-
-        /* استایل اختصاصی بخش صفحات */
-        .quran-container {
-            max-height: 60vh;
+        /* استایل لیست صفحات داخل کارت */
+        .quran-list {
+            max-height: 300px;
             overflow-y: auto;
-            padding-left: 5px;
+            margin-top: 15px;
         }
 
         .page-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
             margin-bottom: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .page-header {
-            padding: 12px;
+            padding: 10px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
+            background: rgba(255,255,255,0.08);
         }
 
         .links-drawer {
             display: none;
-            padding: 12px;
+            padding: 10px;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.25);
-            border-top: 1px solid rgba(255,255,255,0.1);
+            gap: 8px;
+            background: rgba(0,0,0,0.2);
         }
-
-        .link-group { display: flex; flex-direction: column; gap: 6px; }
-        .group-title { font-size: 0.7rem; color: #bbb; margin-bottom: 2px; }
 
         .btn-link {
-            padding: 6px;
-            border-radius: 6px;
-            text-align: center;
+            padding: 5px;
             font-size: 0.8rem;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
             color: white;
             text-decoration: none;
-            background: rgba(255,255,255,0.08);
+            border-radius: 5px;
         }
 
-        .btn-link.yt:active { background: #ff0000; }
-        .btn-link.tg-btn:active { background: #0088cc; }
-
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.95) translateY(10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* استایل منوی پایین (ثابت) */
+        /* --- استایل منوی اصلی (بدون تغییر) --- */
         .nav-wrapper {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            display: flex; justify-content: center; z-index: 1000;
-            padding-bottom: env(safe-area-inset-bottom);
+            position: fixed; bottom: 0; width: 100%;
+            display: flex; justify-content: center;
+            filter: url('#goo'); padding-bottom: 10px;
         }
         .nav {
-            width: 95%; height: 70px; background: var(--menu-color);
-            border-radius: 20px 20px 0 0; position: relative;
+            width: 90%; height: 70px; background: white;
+            border-radius: 25px 25px 0 0; position: relative;
         }
         .nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
-        .nav ul li { flex: 1; height: 70px; position: relative; }
-        .nav ul li a {
-            display: flex; justify-content: center; align-items: center;
-            flex-direction: column; height: 100%; cursor: pointer;
-        }
-        .icon-svg { width: var(--icon-size); height: var(--icon-size); color: #555; transition: 0.4s; z-index: 2; }
-        .list.active .icon-svg { transform: translateY(-32px); color: #000; }
-        .text { position: absolute; font-size: 0.7rem; font-weight: 700; color: #333; opacity: 0; transform: translateY(15px); transition: 0.4s; }
-        .list.active .text { opacity: 1; transform: translateY(18px); }
+        .nav ul li { flex: 1; height: 70px; z-index: 10; }
+        .nav ul li a { display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; }
+        .icon-svg { width: 26px; height: 26px; color: #555; transition: 0.5s; }
+        .list.active .icon-svg { transform: translateY(-35px); color: black; }
+        .text { position: absolute; font-size: 0.7rem; color: #333; opacity: 0; transform: translateY(20px); transition: 0.5s; }
+        .list.active .text { opacity: 1; transform: translateY(15px); }
         .indicator {
-            position: absolute; top: -30px; width: 20%; height: 60px;
-            display: flex; justify-content: center; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: absolute; top: -35px; width: 20%; height: 60px;
+            display: flex; justify-content: center; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .indicator::after {
-            content: ''; width: 55px; height: 55px; background: var(--اصفر);
-            border-radius: 50%; box-shadow: 0 0 0 8px var(--menu-color);
+            content: ''; width: 60px; height: 60px; background: var(--اصفر);
+            border-radius: 50%; box-shadow: 0 0 0 8px white;
         }
-        
-        /* جابجایی ایندیکیتور */
         .list:nth-child(1).active ~ .indicator { right: 0%; }
         .list:nth-child(2).active ~ .indicator { right: 20%; }
         .list:nth-child(3).active ~ .indicator { right: 40%; }
         .list:nth-child(4).active ~ .indicator { right: 60%; }
         .list:nth-child(5).active ~ .indicator { right: 80%; }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
     </style>
 </head>
 <body>
 
     <div class="content-area">
         <div id="card-0" class="card active">
-            <h2>سنی گرافیک</h2>
-            <p>به اپلیکیشن رسمی محتوای قرآنی خوش آمدید. تمامی کلیپ‌ها با کیفیت 4K و بدون لوگو جهت نشر دینی آماده شده‌اند.</p>
-        </div>
-
-        <div id="card-1" class="card">
-            <h2>انتخاب صفحه قرآن</h2>
-            <div class="quran-container">
-                
-                <div class="page-item">
-                    <div class="page-header" onclick="toggleLinks(1)">
-                        <span>صفحه ۱ (سوره الفاتحة)</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </div>
-                    <div id="links-1" class="links-drawer">
-                        <div class="link-group">
-                            <span class="group-title">📺 یوتیوب</span>
-                            <a href="#" class="btn-link yt">4K</a>
-                            <a href="#" class="btn-link yt">HD</a>
-                        </div>
-                        <div class="link-group">
-                            <span class="group-title">📥 تلگرام</span>
-                            <a href="#" class="btn-link tg-btn">4K</a>
-                            <a href="#" class="btn-link tg-btn">HD</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="page-item">
-                    <div class="page-header" onclick="toggleLinks(2)">
-                        <span>صفحه ۲ (سوره البقرة)</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                    </div>
-                    <div id="links-2" class="links-drawer">
-                        <div class="link-group">
-                            <span class="group-title">📺 یوتیوب</span>
-                            <a href="#" class="btn-link yt">4K</a>
-                        </div>
-                        <div class="link-group">
-                            <span class="group-title">📥 تلگرام</span>
-                            <a href="#" class="btn-link tg-btn">4K</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="card-2" class="card">
-            <h2>انتخاب جزء</h2>
-            <p>این بخش در حال آماده‌سازی است...</p>
-        </div>
-
-        <div id="card-3" class="card">
-            <h2>تنظیمات</h2>
-            <p>تنظیمات قاری و تم برنامه را اینجا مدیریت کنید.</p>
-        </div>
-
-        <div id="card-4" class="card">
-            <h2>درباره ما</h2>
-            <p>سنی گرافیک؛ ترکیبی از هنر مدرن و کلام الهی.</p>
-        </div>
-    </div>
-
-    <div class="nav-wrapper">
-        <div class="nav">
-            <ul>
-                <li class="list active" onclick="move(0)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 19v-8.5a1 1 0 0 0-.4-.8l-7-5.25a1 1 0 0 0-1.2 0l-7 5.25a1 1 0 0 0-.4.8V19a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1"/></svg></div><span class="text">خانه</span></a></li>
-                <li class="list" onclick="move(1)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9.8V20m0-10.2c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.31-1.311C14.28 5 15.12 5 16.8 5h2.6c.56 0 .84 0 1.054.109c.188.096.34.249.437.437C21 5.76 21 6.04 21 6.6v8.8c0 .56 0 .84-.11 1.054a1 1 0 0 1-.436.437c-.213.109-.493.109-1.052.109h-2.833c-.939 0-1.41 0-1.836.13a3 3 0 0 0-1.032.552c-.344.283-.605.674-1.126 1.455L12 20"/></svg></div><span class="text">صفحه</span></a></li>
-                <li class="list" onclick="move(2)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 19.5V6.2c0-1.12 0-1.68.218-2.108c.192-.377.497-.682.874-.874C6.52 3 7.08 3 8.2 3h9.2c.56 0 .84 0 1.055.109a1 1 0 0 1 .436.437C19 3.76 19 4.04 19 4.6v11.8c0 .56 0 .84-.11 1.054a1 1 0 0 1-.435.437C18.24 18 17.96 18 17.402 18H7.25A2.25 2.25 0 0 0 5 20.25c0 .414.336.75.75.75h10.652c.559 0 .84 0 1.053-.109a1 1 0 0 0 .436-.437C18 20.24 18 19.96 18 19.4V18"/></svg></div><span class="text">جزء</span></a></li>
-                <li class="list" onclick="move(3)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><span class="text">تنظیمات</span></a></li>
-                <li class="list" onclick="move(4)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div><span class="text">درباره</span></a></li>
-                <div class="indicator"></div>
-            </ul>
-        </div>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
-        tg.headerColor = '#0e1621';
-
-        function move(index) {
-            tg.HapticFeedback.impactOccurred('light');
-            const list = document.querySelectorAll('.list');
-            const cards = document.querySelectorAll('.card');
-            
-            list.forEach(item => item.classList.remove('active'));
-            list[index].classList.add('active');
-
-            cards.forEach(card => card.classList.remove('active'));
-            document.getElementById('card-' + index).classList.add('active');
-        }
-
-        function toggleLinks(id) {
-            const drawer = document.getElementById('links-' + id);
-            const isVisible = drawer.style.display === 'grid';
-            
-            // بستن بقیه کشوها برای خلوت شدن
-            document.querySelectorAll('.links-drawer').forEach(d => d.style.display = 'none');
-            
-            if (!isVisible) {
-                drawer.style.display = 'grid';
-                tg.HapticFeedback.notificationOccurred('success');
-            }
-        }
-    </script>
-</body>
-</html>
+            <h2>سنی گرافیک
