@@ -1,50 +1,698 @@
-// تابع لود صفحات
+const pagesData = [
+    // --- جزء ۱ ---
+    { id: 1, juz: 1, name: "الفاتحة", start: 1, end: 7 },
+    { id: 2, juz: 1, name: "البقرة", start: 1, end: 5 },
+    { id: 3, juz: 1, name: "البقرة", start: 6, end: 16 },
+    { id: 4, juz: 1, name: "البقرة", start: 17, end: 24 },
+    { id: 5, juz: 1, name: "البقرة", start: 25, end: 29 },
+    { id: 6, juz: 1, name: "البقرة", start: 30, end: 37 },
+    { id: 7, juz: 1, name: "البقرة", start: 38, end: 48 },
+    { id: 8, juz: 1, name: "البقرة", start: 49, end: 57 },
+    { id: 9, juz: 1, name: "البقرة", start: 58, end: 69 },
+    { id: 10, juz: 1, name: "البقرة", start: 70, end: 76 },
+    { id: 11, juz: 1, name: "البقرة", start: 77, end: 83 },
+    { id: 12, juz: 1, name: "البقرة", start: 84, end: 88 },
+    { id: 13, juz: 1, name: "البقرة", start: 89, end: 93 },
+    { id: 14, juz: 1, name: "البقرة", start: 94, end: 101 },
+    { id: 15, juz: 1, name: "البقرة", start: 102, end: 105 },
+    { id: 16, juz: 1, name: "البقرة", start: 106, end: 112 },
+    { id: 17, juz: 1, name: "البقرة", start: 113, end: 119 },
+    { id: 18, juz: 1, name: "البقرة", start: 120, end: 126 },
+    { id: 19, juz: 1, name: "البقرة", start: 127, end: 134 },
+    { id: 20, juz: 1, name: "البقرة", start: 135, end: 141 },
+    { id: 21, juz: 1, name: "البقرة", start: 142, end: 145 },
+
+    // --- جزء ۲ ---
+    { id: 22, juz: 2, name: "البقرة", start: 142, end: 145 },
+    { id: 23, juz: 2, name: "البقرة", start: 146, end: 153 },
+    { id: 24, juz: 2, name: "البقرة", start: 154, end: 163 },
+    { id: 25, juz: 2, name: "البقرة", start: 164, end: 169 },
+    { id: 26, juz: 2, name: "البقرة", start: 170, end: 176 },
+    { id: 27, juz: 2, name: "البقرة", start: 177, end: 181 },
+    { id: 28, juz: 2, name: "البقرة", start: 182, end: 186 },
+    { id: 29, juz: 2, name: "البقرة", start: 187, end: 190 },
+    { id: 30, juz: 2, name: "البقرة", start: 191, end: 196 },
+    { id: 31, juz: 2, name: "البقرة", start: 197, end: 202 },
+    { id: 32, juz: 2, name: "البقرة", start: 203, end: 210 },
+    { id: 33, juz: 2, name: "البقرة", start: 211, end: 215 },
+    { id: 34, juz: 2, name: "البقرة", start: 216, end: 219 },
+    { id: 35, juz: 2, name: "البقرة", start: 220, end: 224 },
+    { id: 36, juz: 2, name: "البقرة", start: 225, end: 230 },
+    { id: 37, juz: 2, name: "البقرة", start: 231, end: 233 },
+    { id: 38, juz: 2, name: "البقرة", start: 234, end: 237 },
+    { id: 39, juz: 2, name: "البقرة", start: 238, end: 245 },
+    { id: 40, juz: 2, name: "البقرة", start: 246, end: 248 },
+    { id: 41, juz: 2, name: "البقرة", start: 249, end: 252 },
+
+    // --- جزء ۳ ---
+    { id: 42, juz: 3, name: "البقرة", start: 253, end: 256 },
+    { id: 43, juz: 3, name: "البقرة", start: 257, end: 259 },
+    { id: 44, juz: 3, name: "البقرة", start: 260, end: 264 },
+    { id: 45, juz: 3, name: "البقرة", start: 265, end: 269 },
+    { id: 46, juz: 3, name: "البقرة", start: 270, end: 274 },
+    { id: 47, juz: 3, name: "البقرة", start: 275, end: 281 },
+    { id: 48, juz: 3, name: "البقرة", start: 282, end: 282 },
+    { id: 49, juz: 3, name: "البقرة", start: 283, end: 286 },
+    { id: 50, juz: 3, name: "آل عمران", start: 1, end: 9 },
+    { id: 51, juz: 3, name: "آل عمران", start: 10, end: 15 },
+    { id: 52, juz: 3, name: "آل عمران", start: 16, end: 22 },
+    { id: 53, juz: 3, name: "آل عمران", start: 23, end: 29 },
+    { id: 54, juz: 3, name: "آل عمران", start: 30, end: 37 },
+    { id: 55, juz: 3, name: "آل عمران", start: 38, end: 45 },
+    { id: 56, juz: 3, name: "آل عمران", start: 46, end: 52 },
+    { id: 57, juz: 3, name: "آل عمران", start: 53, end: 61 },
+    { id: 58, juz: 3, name: "آل عمران", start: 62, end: 70 },
+    { id: 59, juz: 3, name: "آل عمران", start: 71, end: 77 },
+    { id: 60, juz: 3, name: "آل عمران", start: 78, end: 83 },
+    { id: 61, juz: 3, name: "آل عمران", start: 84, end: 91 },
+
+    // --- جزء ۴ ---
+    { id: 62, juz: 4, name: "آل عمران", start: 92, end: 100 },
+    { id: 63, juz: 4, name: "آل عمران", start: 101, end: 108 },
+    { id: 64, juz: 4, name: "آل عمران", start: 109, end: 115 },
+    { id: 65, juz: 4, name: "آل عمران", start: 116, end: 121 },
+    { id: 66, juz: 4, name: "آل عمران", start: 122, end: 132 },
+    { id: 67, juz: 4, name: "آل عمران", start: 133, end: 140 },
+    { id: 68, juz: 4, name: "آل عمران", start: 141, end: 148 },
+    { id: 69, juz: 4, name: "آل عمران", start: 149, end: 153 },
+    { id: 70, juz: 4, name: "آل عمران", start: 154, end: 157 },
+    { id: 71, juz: 4, name: "آل عمران", start: 158, end: 165 },
+    { id: 72, juz: 4, name: "آل عمران", start: 166, end: 173 },
+    { id: 73, juz: 4, name: "آل عمران", start: 174, end: 180 },
+    { id: 74, juz: 4, name: "آل عمران", start: 181, end: 186 },
+    { id: 75, juz: 4, name: "آل عمران", start: 187, end: 194 },
+    { id: 76, juz: 4, name: "آل عمران", start: 195, end: 200 },
+    { id: 77, juz: 4, name: "النساء", start: 1, end: 6 },
+    { id: 78, juz: 4, name: "النساء", start: 7, end: 11 },
+    { id: 79, juz: 4, name: "النساء", start: 12, end: 14 },
+    { id: 80, juz: 4, name: "النساء", start: 15, end: 19 },
+    { id: 81, juz: 4, name: "النساء", start: 20, end: 23 },
+
+    // --- جزء ۵ ---
+    { id: 82, juz: 5, name: "النساء", start: 24, end: 26 },
+    { id: 83, juz: 5, name: "النساء", start: 27, end: 33 },
+    { id: 84, juz: 5, name: "النساء", start: 34, end: 37 },
+    { id: 85, juz: 5, name: "النساء", start: 38, end: 44 },
+    { id: 86, juz: 5, name: "النساء", start: 45, end: 51 },
+    { id: 87, juz: 5, name: "النساء", start: 52, end: 59 },
+    { id: 88, juz: 5, name: "النساء", start: 60, end: 65 },
+    { id: 89, juz: 5, name: "النساء", start: 66, end: 74 },
+    { id: 90, juz: 5, name: "النساء", start: 75, end: 79 },
+    { id: 91, juz: 5, name: "النساء", start: 80, end: 86 },
+    { id: 92, juz: 5, name: "النساء", start: 87, end: 91 },
+    { id: 93, juz: 5, name: "النساء", start: 92, end: 94 },
+    { id: 94, juz: 5, name: "النساء", start: 95, end: 101 },
+    { id: 95, juz: 5, name: "النساء", start: 102, end: 105 },
+    { id: 96, juz: 5, name: "النساء", start: 106, end: 113 },
+    { id: 97, juz: 5, name: "النساء", start: 114, end: 121 },
+    { id: 98, juz: 5, name: "النساء", start: 122, end: 127 },
+    { id: 99, juz: 5, name: "النساء", start: 128, end: 134 },
+    { id: 100, juz: 5, name: "النساء", start: 135, end: 140 },
+    { id: 101, juz: 5, name: "النساء", start: 141, end: 147 },
+    // --- جزء ۶ ---
+    { id: 102, juz: 6, name: "النساء", start: 148, end: 154 },
+    { id: 103, juz: 6, name: "النساء", start: 155, end: 162 },
+    { id: 104, juz: 6, name: "النساء", start: 163, end: 170 },
+    { id: 105, juz: 6, name: "النساء", start: 171, end: 175 },
+    { id: 106, juz: 6, name: "النساء", start: 176, end: 176 },
+    { id: 107, juz: 6, name: "المائدة", start: 1, end: 2 },
+    { id: 108, juz: 6, name: "المائدة", start: 3, end: 5 },
+    { id: 109, juz: 6, name: "المائدة", start: 6, end: 9 },
+    { id: 110, juz: 6, name: "المائدة", start: 10, end: 13 },
+    { id: 111, juz: 6, name: "المائدة", start: 14, end: 17 },
+    { id: 112, juz: 6, name: "المائدة", start: 18, end: 23 },
+    { id: 113, juz: 6, name: "المائدة", start: 24, end: 31 },
+    { id: 114, juz: 6, name: "المائدة", start: 32, end: 36 },
+    { id: 115, juz: 6, name: "المائدة", start: 37, end: 41 },
+    { id: 116, juz: 6, name: "المائدة", start: 42, end: 45 },
+    { id: 117, juz: 6, name: "المائدة", start: 46, end: 50 },
+    { id: 118, juz: 6, name: "المائدة", start: 51, end: 57 },
+    { id: 119, juz: 6, name: "المائدة", start: 58, end: 64 },
+    { id: 120, juz: 6, name: "المائدة", start: 65, end: 70 },
+    { id: 121, juz: 6, name: "المائدة", start: 71, end: 76 },
+
+    // --- جزء ۷ ---
+    { id: 122, juz: 7, name: "المائدة", start: 77, end: 82 },
+    { id: 123, juz: 7, name: "المائدة", start: 83, end: 89 },
+    { id: 124, juz: 7, name: "المائدة", start: 90, end: 95 },
+    { id: 125, juz: 7, name: "المائدة", start: 96, end: 103 },
+    { id: 126, juz: 7, name: "المائدة", start: 104, end: 108 },
+    { id: 127, juz: 7, name: "المائدة", start: 109, end: 113 },
+    { id: 128, juz: 7, name: "المائدة", start: 114, end: 120 },
+    { id: 129, juz: 7, name: "الأنعام", start: 1, end: 8 },
+    { id: 130, juz: 7, name: "الأنعام", start: 9, end: 18 },
+    { id: 131, juz: 7, name: "الأنعام", start: 19, end: 27 },
+    { id: 132, juz: 7, name: "الأنعام", start: 28, end: 35 },
+    { id: 133, juz: 7, name: "الأنعام", start: 36, end: 44 },
+    { id: 134, juz: 7, name: "الأنعام", start: 45, end: 52 },
+    { id: 135, juz: 7, name: "الأنعام", start: 53, end: 59 },
+    { id: 136, juz: 7, name: "الأنعام", start: 60, end: 68 },
+    { id: 137, juz: 7, name: "الأنعام", start: 69, end: 73 },
+    { id: 138, juz: 7, name: "الأنعام", start: 74, end: 81 },
+    { id: 139, juz: 7, name: "الأنعام", start: 82, end: 90 },
+    { id: 140, juz: 7, name: "الأنعام", start: 91, end: 94 },
+    { id: 141, juz: 7, name: "الأنعام", start: 95, end: 101 },
+
+    // --- جزء ۸ ---
+    { id: 142, juz: 8, name: "الأنعام", start: 102, end: 110 },
+    { id: 143, juz: 8, name: "الأنعام", start: 111, end: 118 },
+    { id: 144, juz: 8, name: "الأنعام", start: 119, end: 124 },
+    { id: 145, juz: 8, name: "الأنعام", start: 125, end: 131 },
+    { id: 146, juz: 8, name: "الأنعام", start: 132, end: 137 },
+    { id: 147, juz: 8, name: "الأنعام", start: 138, end: 142 },
+    { id: 148, juz: 8, name: "الأنعام", start: 143, end: 146 },
+    { id: 149, juz: 8, name: "الأنعام", start: 147, end: 151 },
+    { id: 150, juz: 8, name: "الأنعام", start: 152, end: 157 },
+    { id: 151, juz: 8, name: "الأنعام", start: 158, end: 165 },
+    { id: 152, juz: 8, name: "الأعراف", start: 1, end: 11 },
+    { id: 153, juz: 8, name: "الأعراف", start: 12, end: 22 },
+    { id: 154, juz: 8, name: "الأعراف", start: 23, end: 30 },
+    { id: 155, juz: 8, name: "الأعراف", start: 31, end: 37 },
+    { id: 156, juz: 8, name: "الأعراف", start: 38, end: 43 },
+    { id: 157, juz: 8, name: "الأعراف", start: 44, end: 51 },
+    { id: 158, juz: 8, name: "الأعراف", start: 52, end: 57 },
+    { id: 159, juz: 8, name: "الأعراف", start: 58, end: 67 },
+    { id: 160, juz: 8, name: "الأعراف", start: 68, end: 73 },
+    { id: 161, juz: 8, name: "الأعراف", start: 74, end: 81 },
+
+    // --- جزء ۹ ---
+    { id: 162, juz: 9, name: "الأعراف", start: 82, end: 87 },
+    { id: 163, juz: 9, name: "الأعراف", start: 88, end: 95 },
+    { id: 164, juz: 9, name: "الأعراف", start: 96, end: 104 },
+    { id: 165, juz: 9, name: "الأعراف", start: 105, end: 120 },
+    { id: 166, juz: 9, name: "الأعراف", start: 121, end: 130 },
+    { id: 167, juz: 9, name: "الأعراف", start: 131, end: 137 },
+    { id: 168, juz: 9, name: "الأعراف", start: 138, end: 143 },
+    { id: 169, juz: 9, name: "الأعراف", start: 144, end: 149 },
+    { id: 170, juz: 9, name: "الأعراف", start: 150, end: 155 },
+    { id: 171, juz: 9, name: "الأعراف", start: 156, end: 159 },
+    { id: 172, juz: 9, name: "الأعراف", start: 160, end: 163 },
+    { id: 173, juz: 9, name: "الأعراف", start: 164, end: 170 },
+    { id: 174, juz: 9, name: "الأعراف", start: 171, end: 178 },
+    { id: 175, juz: 9, name: "الأعراف", start: 179, end: 187 },
+    { id: 176, juz: 9, name: "الأعراف", start: 188, end: 195 },
+    { id: 177, juz: 9, name: "الأعراف", start: 196, end: 206 },
+    { id: 178, juz: 9, name: "الأنفال", start: 1, end: 8 },
+    { id: 179, juz: 9, name: "الأنفال", start: 9, end: 16 },
+    { id: 180, juz: 9, name: "الأنفال", start: 17, end: 25 },
+    { id: 181, juz: 9, name: "الأنفال", start: 26, end: 33 },
+
+    // --- جزء ۱۰ ---
+    { id: 182, juz: 10, name: "الأنفال", start: 34, end: 40 },
+    { id: 183, juz: 10, name: "الأنفال", start: 41, end: 45 },
+    { id: 184, juz: 10, name: "الأنفال", start: 46, end: 52 },
+    { id: 185, juz: 10, name: "الأنفال", start: 53, end: 61 },
+    { id: 186, juz: 10, name: "الأنفال", start: 62, end: 69 },
+    { id: 187, juz: 10, name: "الأنفال", start: 70, end: 75 },
+    { id: 188, juz: 10, name: "التوبة", start: 1, end: 6 },
+    { id: 189, juz: 10, name: "التوبة", start: 7, end: 13 },
+    { id: 190, juz: 10, name: "التوبة", start: 14, end: 20 },
+    { id: 191, juz: 10, name: "التوبة", start: 21, end: 26 },
+    { id: 192, juz: 10, name: "التوبة", start: 27, end: 31 },
+    { id: 193, juz: 10, name: "التوبة", start: 32, end: 36 },
+    { id: 194, juz: 10, name: "التوبة", start: 37, end: 40 },
+    { id: 195, juz: 10, name: "التوبة", start: 41, end: 47 },
+    { id: 196, juz: 10, name: "التوبة", start: 48, end: 54 },
+    { id: 197, juz: 10, name: "التوبة", start: 55, end: 59 },
+    { id: 198, juz: 10, name: "التوبة", start: 60, end: 68 },
+    { id: 199, juz: 10, name: "التوبة", start: 69, end: 72 },
+    { id: 200, juz: 10, name: "التوبة", start: 73, end: 79 },
+    { id: 201, juz: 10, name: "التوبة", start: 80, end: 86 },
+    // --- جزء ۱۱ ---
+    { id: 202, juz: 11, name: "التوبة", start: 87, end: 93 },
+    { id: 203, juz: 11, name: "التوبة", start: 94, end: 99 },
+    { id: 204, juz: 11, name: "التوبة", start: 100, end: 106 },
+    { id: 205, juz: 11, name: "التوبة", start: 107, end: 111 },
+    { id: 206, juz: 11, name: "التوبة", start: 112, end: 117 },
+    { id: 207, juz: 11, name: "التوبة", start: 118, end: 122 },
+    { id: 208, juz: 11, name: "التوبة", start: 123, end: 129 },
+    { id: 209, juz: 11, name: "يونس", start: 1, end: 6 },
+    { id: 210, juz: 11, name: "يونس", start: 7, end: 14 },
+    { id: 211, juz: 11, name: "يونس", start: 15, end: 20 },
+    { id: 212, juz: 11, name: "يونس", start: 21, end: 25 },
+    { id: 213, juz: 11, name: "يونس", start: 26, end: 33 },
+    { id: 214, juz: 11, name: "يونس", start: 34, end: 42 },
+    { id: 215, juz: 11, name: "يونس", start: 43, end: 53 },
+    { id: 216, juz: 11, name: "يونس", start: 54, end: 61 },
+    { id: 217, juz: 11, name: "يونس", start: 62, end: 70 },
+    { id: 218, juz: 11, name: "يونس", start: 71, end: 78 },
+    { id: 219, juz: 11, name: "يونس", start: 79, end: 88 },
+    { id: 220, juz: 11, name: "يونس", start: 89, end: 97 },
+    { id: 221, juz: 11, name: "يونس", start: 98, end: 106 },
+
+    // --- جزء ۱۲ ---
+    { id: 222, juz: 12, name: "يونس/هود", start: 107, end: 5 },
+    { id: 223, juz: 12, name: "هود", start: 6, end: 12 },
+    { id: 224, juz: 12, name: "هود", start: 13, end: 19 },
+    { id: 225, juz: 12, name: "هود", start: 20, end: 28 },
+    { id: 226, juz: 12, name: "هود", start: 29, end: 37 },
+    { id: 227, juz: 12, name: "هود", start: 38, end: 45 },
+    { id: 228, juz: 12, name: "هود", start: 46, end: 53 },
+    { id: 229, juz: 12, name: "هود", start: 54, end: 62 },
+    { id: 230, juz: 12, name: "هود", start: 63, end: 71 },
+    { id: 231, juz: 12, name: "هود", start: 72, end: 81 },
+    { id: 232, juz: 12, name: "هود", start: 82, end: 88 },
+    { id: 233, juz: 12, name: "هود", start: 89, end: 97 },
+    { id: 234, juz: 12, name: "هود", start: 98, end: 108 },
+    { id: 235, juz: 12, name: "هود/يوسف", start: 109, end: 4 },
+    { id: 236, juz: 12, name: "يوسف", start: 5, end: 14 },
+    { id: 237, juz: 12, name: "يوسف", start: 15, end: 22 },
+    { id: 238, juz: 12, name: "يوسف", start: 23, end: 30 },
+    { id: 239, juz: 12, name: "يوسف", start: 31, end: 37 },
+    { id: 240, juz: 12, name: "يوسف", start: 38, end: 43 },
+    { id: 241, juz: 12, name: "يوسف", start: 44, end: 52 },
+
+    // --- جزء ۱۳ ---
+    { id: 242, juz: 13, name: "يوسف", start: 53, end: 63 },
+    { id: 243, juz: 13, name: "يوسف", start: 64, end: 69 },
+    { id: 244, juz: 13, name: "يوسف", start: 70, end: 78 },
+    { id: 245, juz: 13, name: "يوسف", start: 79, end: 86 },
+    { id: 246, juz: 13, name: "يوسف", start: 87, end: 95 },
+    { id: 247, juz: 13, name: "يوسف", start: 96, end: 103 },
+    { id: 248, juz: 13, name: "يوسف/الرعد", start: 104, end: 5 },
+    { id: 249, juz: 13, name: "الرعد", start: 6, end: 13 },
+    { id: 250, juz: 13, name: "الرعد", start: 14, end: 18 },
+    { id: 251, juz: 13, name: "الرعد", start: 19, end: 28 },
+    { id: 252, juz: 13, name: "الرعد", start: 29, end: 34 },
+    { id: 253, juz: 13, name: "الرعد", start: 35, end: 42 },
+    { id: 254, juz: 13, name: "الرعد/إبراهيم", start: 43, end: 5 },
+    { id: 255, juz: 13, name: "إبراهيم", start: 6, end: 10 },
+    { id: 256, juz: 13, name: "إبراهيم", start: 11, end: 18 },
+    { id: 257, juz: 13, name: "إبراهيم", start: 19, end: 24 },
+    { id: 258, juz: 13, name: "إبراهيم", start: 25, end: 33 },
+    { id: 259, juz: 13, name: "إبراهيم", start: 34, end: 42 },
+    { id: 260, juz: 13, name: "إبراهيم", start: 43, end: 52 },
+    { id: 261, juz: 13, name: "الحجر", start: 1, end: 15 },
+
+    // --- جزء ۱۴ ---
+    { id: 262, juz: 14, name: "الحجر", start: 16, end: 31 },
+    { id: 263, juz: 14, name: "الحجر", start: 32, end: 51 },
+    { id: 264, juz: 14, name: "الحجر", start: 52, end: 70 },
+    { id: 265, juz: 14, name: "الحجر", start: 71, end: 83 },
+    { id: 266, juz: 14, name: "الحجر", start: 84, end: 99 },
+    { id: 267, juz: 14, name: "النحل", start: 1, end: 6 },
+    { id: 268, juz: 14, name: "النحل", start: 7, end: 14 },
+    { id: 269, juz: 14, name: "النحل", start: 15, end: 26 },
+    { id: 270, juz: 14, name: "النحل", start: 27, end: 34 },
+    { id: 271, juz: 14, name: "النحل", start: 35, end: 42 },
+    { id: 272, juz: 14, name: "النحل", start: 43, end: 54 },
+    { id: 273, juz: 14, name: "النحل", start: 55, end: 64 },
+    { id: 274, juz: 14, name: "النحل", start: 65, end: 72 },
+    { id: 275, juz: 14, name: "النحل", start: 73, end: 79 },
+    { id: 276, juz: 14, name: "النحل", start: 80, end: 87 },
+    { id: 277, juz: 14, name: "النحل", start: 88, end: 93 },
+    { id: 278, juz: 14, name: "النحل", start: 94, end: 102 },
+    { id: 279, juz: 14, name: "النحل", start: 103, end: 110 },
+    { id: 280, juz: 14, name: "النحل", start: 111, end: 118 },
+    { id: 281, juz: 14, name: "النحل", start: 119, end: 128 },
+
+    // --- جزء ۱۵ ---
+    { id: 282, juz: 15, name: "الإسراء", start: 1, end: 7 },
+    { id: 283, juz: 15, name: "الإسراء", start: 8, end: 17 },
+    { id: 284, juz: 15, name: "الإسراء", start: 18, end: 27 },
+    { id: 285, juz: 15, name: "الإسراء", start: 28, end: 38 },
+    { id: 286, juz: 15, name: "الإسراء", start: 39, end: 49 },
+    { id: 287, juz: 15, name: "الإسراء", start: 50, end: 58 },
+    { id: 288, juz: 15, name: "الإسراء", start: 59, end: 66 },
+    { id: 289, juz: 15, name: "الإسراء", start: 67, end: 75 },
+    { id: 290, juz: 15, name: "الإسراء", start: 76, end: 86 },
+    { id: 291, juz: 15, name: "الإسراء", start: 87, end: 96 },
+    { id: 292, juz: 15, name: "الإسراء", start: 97, end: 104 },
+    { id: 293, juz: 15, name: "الإسراء/الكهف", start: 105, end: 4 },
+    { id: 294, juz: 15, name: "الكهف", start: 5, end: 15 },
+    { id: 295, juz: 15, name: "الكهف", start: 16, end: 20 },
+    { id: 296, juz: 15, name: "الكهف", start: 21, end: 27 },
+    { id: 297, juz: 15, name: "الكهف", start: 28, end: 34 },
+    { id: 298, juz: 15, name: "الكهف", start: 35, end: 45 },
+    { id: 299, juz: 15, name: "الكهف", start: 46, end: 53 },
+    { id: 300, juz: 15, name: "الكهف", start: 54, end: 61 },
+    { id: 301, juz: 15, name: "الكهف", start: 62, end: 74 },
+    // --- جزء ۱۶ ---
+    { id: 302, juz: 16, name: "الكهف", start: 75, end: 83 },
+    { id: 303, juz: 16, name: "الكهف", start: 84, end: 97 },
+    { id: 304, juz: 16, name: "الكهف/مريم", start: 98, end: 11 },
+    { id: 305, juz: 16, name: "مريم", start: 12, end: 25 },
+    { id: 306, juz: 16, name: "مريم", start: 26, end: 38 },
+    { id: 307, juz: 16, name: "مريم", start: 39, end: 51 },
+    { id: 308, juz: 16, name: "مريم", start: 52, end: 64 },
+    { id: 309, juz: 16, name: "مريم", start: 65, end: 76 },
+    { id: 310, juz: 16, name: "مريم", start: 77, end: 95 },
+    { id: 311, juz: 16, name: "مريم/طه", start: 96, end: 12 },
+    { id: 312, juz: 16, name: "طه", start: 13, end: 37 },
+    { id: 313, juz: 16, name: "طه", start: 38, end: 51 },
+    { id: 314, juz: 16, name: "طه", start: 52, end: 64 },
+    { id: 315, juz: 16, name: "طه", start: 65, end: 76 },
+    { id: 316, juz: 16, name: "طه", start: 77, end: 87 },
+    { id: 317, juz: 16, name: "طه", start: 88, end: 98 },
+    { id: 318, juz: 16, name: "طه", start: 99, end: 113 },
+    { id: 319, juz: 16, name: "طه", start: 114, end: 125 },
+    { id: 320, juz: 16, name: "طه", start: 126, end: 135 },
+    { id: 321, juz: 16, name: "الأنبياء", start: 1, end: 10 },
+
+    // --- جزء ۱۷ ---
+    { id: 322, juz: 17, name: "الأنبياء", start: 11, end: 24 },
+    { id: 323, juz: 17, name: "الأنبياء", start: 25, end: 35 },
+    { id: 324, juz: 17, name: "الأنبياء", start: 36, end: 44 },
+    { id: 325, juz: 17, name: "الأنبياء", start: 45, end: 57 },
+    { id: 326, juz: 17, name: "الأنبياء", start: 58, end: 72 },
+    { id: 327, juz: 17, name: "الأنبياء", start: 73, end: 81 },
+    { id: 328, juz: 17, name: "الأنبياء", start: 82, end: 90 },
+    { id: 329, juz: 17, name: "الأنبياء", start: 91, end: 101 },
+    { id: 330, juz: 17, name: "الأنبياء", start: 102, end: 112 },
+    { id: 331, juz: 17, name: "الحج", start: 1, end: 5 },
+    { id: 332, juz: 17, name: "الحج", start: 6, end: 15 },
+    { id: 333, juz: 17, name: "الحج", start: 16, end: 23 },
+    { id: 334, juz: 17, name: "الحج", start: 24, end: 30 },
+    { id: 335, juz: 17, name: "الحج", start: 31, end: 38 },
+    { id: 336, juz: 17, name: "الحج", start: 39, end: 46 },
+    { id: 337, juz: 17, name: "الحج", start: 47, end: 55 },
+    { id: 338, juz: 17, name: "الحج", start: 56, end: 64 },
+    { id: 339, juz: 17, name: "الحج", start: 65, end: 72 },
+    { id: 340, juz: 17, name: "الحج", start: 73, end: 78 },
+    { id: 341, juz: 17, name: "المؤمنون", start: 1, end: 17 },
+
+    // --- جزء ۱۸ ---
+    { id: 342, juz: 18, name: "المؤمنون", start: 18, end: 27 },
+    { id: 343, juz: 18, name: "المؤمنون", start: 28, end: 42 },
+    { id: 344, juz: 18, name: "المؤمنون", start: 43, end: 59 },
+    { id: 345, juz: 18, name: "المؤمنون", start: 60, end: 74 },
+    { id: 346, juz: 18, name: "المؤمنون", start: 75, end: 89 },
+    { id: 347, juz: 18, name: "المؤمنون", start: 90, end: 104 },
+    { id: 348, juz: 18, name: "المؤمنون", start: 105, end: 118 },
+    { id: 349, juz: 18, name: "النور", start: 1, end: 10 },
+    { id: 350, juz: 18, name: "النور", start: 11, end: 20 },
+    { id: 351, juz: 18, name: "النور", start: 21, end: 27 },
+    { id: 352, juz: 18, name: "النور", start: 28, end: 31 },
+    { id: 353, juz: 18, name: "النور", start: 32, end: 36 },
+    { id: 354, juz: 18, name: "النور", start: 37, end: 43 },
+    { id: 355, juz: 18, name: "النور", start: 44, end: 53 },
+    { id: 356, juz: 18, name: "النور", start: 54, end: 58 },
+    { id: 357, juz: 18, name: "النور", start: 59, end: 61 },
+    { id: 358, juz: 18, name: "النور/الفرقان", start: 62, end: 2 },
+    { id: 359, juz: 18, name: "الفرقان", start: 3, end: 11 },
+    { id: 360, juz: 18, name: "الفرقان", start: 12, end: 20 },
+    { id: 361, juz: 18, name: "الفرقان", start: 21, end: 32 },
+
+    // --- جزء ۱۹ ---
+    { id: 362, juz: 19, name: "الفرقان", start: 33, end: 43 },
+    { id: 363, juz: 19, name: "الفرقان", start: 44, end: 55 },
+    { id: 364, juz: 19, name: "الفرقان", start: 56, end: 67 },
+    { id: 365, juz: 19, name: "الفرقان", start: 68, end: 77 },
+    { id: 366, juz: 19, name: "الشعراء", start: 1, end: 19 },
+    { id: 367, juz: 19, name: "الشعراء", start: 20, end: 39 },
+    { id: 368, juz: 19, name: "الشعراء", start: 40, end: 60 },
+    { id: 369, juz: 19, name: "الشعراء", start: 61, end: 83 },
+    { id: 370, juz: 19, name: "الشعراء", start: 84, end: 111 },
+    { id: 371, juz: 19, name: "الشعراء", start: 112, end: 136 },
+    { id: 372, juz: 19, name: "الشعراء", start: 137, end: 159 },
+    { id: 373, juz: 19, name: "الشعراء", start: 160, end: 183 },
+    { id: 374, juz: 19, name: "الشعراء", start: 184, end: 206 },
+    { id: 375, juz: 19, name: "الشعراء", start: 207, end: 227 },
+    { id: 376, juz: 19, name: "النمل", start: 1, end: 13 },
+    { id: 377, juz: 19, name: "النمل", start: 14, end: 22 },
+    { id: 378, juz: 19, name: "النمل", start: 23, end: 35 },
+    { id: 379, juz: 19, name: "النمل", start: 36, end: 44 },
+    { id: 380, juz: 19, name: "النمل", start: 45, end: 55 },
+    { id: 381, juz: 19, name: "النمل", start: 56, end: 59 },
+
+    // --- جزء ۲۰ ---
+    { id: 382, juz: 20, name: "النمل", start: 60, end: 63 },
+    { id: 383, juz: 20, name: "النمل", start: 64, end: 76 },
+    { id: 384, juz: 20, name: "النمل", start: 77, end: 88 },
+    { id: 385, juz: 20, name: "النمل/القصص", start: 89, end: 5 },
+    { id: 386, juz: 20, name: "القصص", start: 6, end: 13 },
+    { id: 387, juz: 20, name: "القصص", start: 14, end: 21 },
+    { id: 388, juz: 20, name: "القصص", start: 22, end: 28 },
+    { id: 389, juz: 20, name: "القصص", start: 29, end: 35 },
+    { id: 390, juz: 20, name: "القصص", start: 36, end: 43 },
+    { id: 391, juz: 20, name: "القصص", start: 44, end: 50 },
+    { id: 392, juz: 20, name: "القصص", start: 51, end: 59 },
+    { id: 393, juz: 20, name: "القصص", start: 60, end: 70 },
+    { id: 394, juz: 20, name: "القصص", start: 71, end: 77 },
+    { id: 395, juz: 20, name: "القصص", start: 78, end: 84 },
+    { id: 396, juz: 20, name: "القصص/العنكبوت", start: 85, end: 6 },
+    { id: 397, juz: 20, name: "العنكبوت", start: 7, end: 14 },
+    { id: 398, juz: 20, name: "العنكبوت", start: 15, end: 23 },
+    { id: 399, juz: 20, name: "العنكبوت", start: 24, end: 30 },
+    { id: 400, juz: 20, name: "العنكبوت", start: 31, end: 38 },
+    { id: 401, juz: 20, name: "العنكبوت", start: 39, end: 45 },
+    // --- جزء ۲۱ ---
+    { id: 402, juz: 21, name: "العنكبوت", start: 46, end: 52 },
+    { id: 403, juz: 21, name: "العنكبوت", start: 53, end: 63 },
+    { id: 404, juz: 21, name: "العنكبوت/الروم", start: 64, end: 5 },
+    { id: 405, juz: 21, name: "الروم", start: 6, end: 15 },
+    { id: 406, juz: 21, name: "الروم", start: 16, end: 24 },
+    { id: 407, juz: 21, name: "الروم", start: 25, end: 32 },
+    { id: 408, juz: 21, name: "الروم", start: 33, end: 41 },
+    { id: 409, juz: 21, name: "الروم", start: 42, end: 50 },
+    { id: 410, juz: 21, name: "الروم/لقمان", start: 51, end: 11 },
+    { id: 411, juz: 21, name: "لقمان", start: 12, end: 19 },
+    { id: 412, juz: 21, name: "لقمان", start: 20, end: 28 },
+    { id: 413, juz: 21, name: "لقمان/السجدة", start: 29, end: 11 },
+    { id: 414, juz: 21, name: "السجدة", start: 12, end: 20 },
+    { id: 415, juz: 21, name: "السجدة/الأحزاب", start: 21, end: 6 },
+    { id: 416, juz: 21, name: "الأحزاب", start: 7, end: 15 },
+    { id: 417, juz: 21, name: "الأحزاب", start: 16, end: 22 },
+    { id: 418, juz: 21, name: "الأحزاب", start: 23, end: 30 },
+    { id: 419, juz: 21, name: "الأحزاب", start: 31, end: 35 },
+    { id: 420, juz: 21, name: "الأحزاب", start: 36, end: 43 },
+    { id: 421, juz: 21, name: "الأحزاب", start: 44, end: 50 },
+
+    // --- جزء ۲۲ ---
+    { id: 422, juz: 22, name: "الأحزاب", start: 51, end: 54 },
+    { id: 423, juz: 22, name: "الأحزاب", start: 55, end: 62 },
+    { id: 424, juz: 22, name: "الأحزاب", start: 63, end: 73 },
+    { id: 425, juz: 22, name: "سبأ", start: 1, end: 7 },
+    { id: 426, juz: 22, name: "سبأ", start: 8, end: 14 },
+    { id: 427, juz: 22, name: "سبأ/فاطر", start: 45, end: 3 },
+    { id: 428, juz: 22, name: "فاطر", start: 4, end: 11 },
+    { id: 429, juz: 22, name: "فاطر", start: 12, end: 18 },
+    { id: 430, juz: 22, name: "فاطر", start: 19, end: 30 },
+    { id: 431, juz: 22, name: "فاطر", start: 31, end: 38 },
+    { id: 432, juz: 22, name: "فاطر", start: 39, end: 44 },
+    { id: 433, juz: 22, name: "فاطر/يس", start: 45, end: 12 },
+    { id: 434, juz: 22, name: "يس", start: 13, end: 27 },
+    { id: 435, juz: 22, name: "يس", start: 28, end: 40 },
+    { id: 436, juz: 22, name: "يس", start: 41, end: 54 },
+    { id: 437, juz: 22, name: "يس", start: 55, end: 70 },
+    { id: 438, juz: 22, name: "يس/الصافات", start: 71, end: 21 },
+    { id: 439, juz: 22, name: "الصافات", start: 22, end: 51 },
+    { id: 440, juz: 22, name: "الصافات", start: 52, end: 76 },
+    { id: 441, juz: 22, name: "الصافات", start: 77, end: 102 },
+
+    // --- جزء ۲۳ ---
+    { id: 442, juz: 23, name: "الصافات", start: 103, end: 126 },
+    { id: 443, juz: 23, name: "الصافات", start: 127, end: 153 },
+    { id: 444, juz: 23, name: "الصافات/ص", start: 154, end: 12 },
+    { id: 445, juz: 23, name: "ص", start: 13, end: 26 },
+    { id: 446, juz: 23, name: "ص", start: 27, end: 42 },
+    { id: 447, juz: 23, name: "ص", start: 43, end: 61 },
+    { id: 448, juz: 23, name: "ص", start: 62, end: 83 },
+    { id: 449, juz: 23, name: "ص/الزمر", start: 84, end: 5 },
+    { id: 450, juz: 23, name: "الزمر", start: 6, end: 10 },
+    { id: 451, juz: 23, name: "الزمر", start: 11, end: 21 },
+    { id: 452, juz: 23, name: "الزمر", start: 22, end: 31 },
+    { id: 453, juz: 23, name: "الزمر", start: 32, end: 40 },
+    { id: 454, juz: 23, name: "الزمر", start: 41, end: 47 },
+    { id: 455, juz: 23, name: "الزمر", start: 48, end: 56 },
+    { id: 456, juz: 23, name: "الزمر", start: 57, end: 67 },
+    { id: 457, juz: 23, name: "الزمر", start: 68, end: 74 },
+    { id: 458, juz: 23, name: "الزمر/غافر", start: 75, end: 6 },
+    { id: 459, juz: 23, name: "غافر", start: 7, end: 16 },
+    { id: 460, juz: 23, name: "غافر", start: 17, end: 25 },
+    { id: 461, juz: 23, name: "غافر", start: 26, end: 33 },
+
+    // --- جزء ۲۴ ---
+    { id: 462, juz: 24, name: "غافر", start: 34, end: 40 },
+    { id: 463, juz: 24, name: "غافر", start: 41, end: 49 },
+    { id: 464, juz: 24, name: "غافر", start: 50, end: 58 },
+    { id: 465, juz: 24, name: "غافر", start: 59, end: 66 },
+    { id: 466, juz: 24, name: "غافر", start: 67, end: 77 },
+    { id: 467, juz: 24, name: "غافر/فصلت", start: 78, end: 8 },
+    { id: 468, juz: 24, name: "فصلت", start: 9, end: 11 },
+    { id: 469, juz: 24, name: "فصلت", start: 12, end: 20 },
+    { id: 470, juz: 24, name: "فصلت", start: 21, end: 29 },
+    { id: 471, juz: 24, name: "فصلت", start: 30, end: 38 },
+    { id: 472, juz: 24, name: "فصلت", start: 39, end: 46 },
+    { id: 473, juz: 24, name: "فصلت/الشورى", start: 47, end: 3 },
+    { id: 474, juz: 24, name: "الشورى", start: 4, end: 10 },
+    { id: 475, juz: 24, name: "الشورى", start: 11, end: 15 },
+    { id: 476, juz: 24, name: "الشورى", start: 16, end: 22 },
+    { id: 477, juz: 24, name: "الشورى", start: 23, end: 31 },
+    { id: 478, juz: 24, name: "الشورى", start: 32, end: 44 },
+    { id: 479, juz: 24, name: "الشورى", start: 45, end: 51 },
+    { id: 480, juz: 24, name: "الشورى/الزخرف", start: 52, end: 10 },
+    { id: 481, juz: 24, name: "الزخرف", start: 11, end: 22 },
+
+    // --- جزء ۲۵ ---
+    { id: 482, juz: 25, name: "الزخرف", start: 23, end: 33 },
+    { id: 483, juz: 25, name: "الزخرف", start: 34, end: 47 },
+    { id: 484, juz: 25, name: "الزخرف", start: 48, end: 60 },
+    { id: 485, juz: 25, name: "الزخرف", start: 61, end: 73 },
+    { id: 486, juz: 25, name: "الزخرف", start: 74, end: 89 },
+    { id: 487, juz: 25, name: "الدخان", start: 1, end: 18 },
+    { id: 488, juz: 25, name: "الدخان", start: 19, end: 39 },
+    { id: 489, juz: 25, name: "الدخان/الجاثية", start: 40, end: 13 },
+    { id: 490, juz: 25, name: "الجاثية", start: 14, end: 22 },
+    { id: 491, juz: 25, name: "الجاثية", start: 23, end: 32 },
+    { id: 492, juz: 25, name: "الجاثية", start: 33, end: 37 },
+    { id: 493, juz: 25, name: "الأحقاف", start: 1, end: 5 },
+    { id: 494, juz: 25, name: "الأحقاف", start: 6, end: 14 },
+    { id: 495, juz: 25, name: "الأحقاف", start: 15, end: 20 },
+    { id: 496, juz: 25, name: "الأحقاف", start: 21, end: 28 },
+    { id: 497, juz: 25, name: "الأحقاف/محمد", start: 29, end: 4 },
+    { id: 498, juz: 25, name: "محمد", start: 5, end: 11 },
+    { id: 499, juz: 25, name: "محمد", start: 12, end: 19 },
+    { id: 500, juz: 25, name: "محمد", start: 20, end: 28 },
+    { id: 501, juz: 25, name: "محمد", start: 29, end: 38 },
+// --- جزء ۲۶ ---
+    { id: 502, juz: 26, name: "الفتح", start: 1, end: 9 },
+    { id: 503, juz: 26, name: "الفتح", start: 10, end: 15 },
+    { id: 504, juz: 26, name: "الفتح", start: 16, end: 23 },
+    { id: 505, juz: 26, name: "الفتح", start: 24, end: 28 },
+    { id: 506, juz: 26, name: "الفتح/الحجرات", start: 29, end: 4 },
+    { id: 507, juz: 26, name: "الحجرات", start: 5, end: 11 },
+    { id: 508, juz: 26, name: "الحجرات", start: 12, end: 18 },
+    { id: 509, juz: 26, name: "ق", start: 1, end: 15 },
+    { id: 510, juz: 26, name: "ق", start: 16, end: 35 },
+    { id: 511, juz: 26, name: "ق/الذاريات", start: 36, end: 6 },
+    { id: 512, juz: 26, name: "الذاريات", start: 7, end: 30 },
+    { id: 513, juz: 26, name: "الذاريات", start: 31, end: 51 },
+    { id: 514, juz: 26, name: "الذاريات/الطور", start: 52, end: 14 },
+    { id: 515, juz: 26, name: "الطور", start: 15, end: 31 },
+    { id: 516, juz: 26, name: "الطور/النجم", start: 32, end: 25 },
+    { id: 517, juz: 26, name: "النجم", start: 26, end: 62 },
+
+    // --- جزء ۲۷ ---
+    { id: 518, juz: 27, name: "القمر", start: 1, end: 6 },
+    { id: 519, juz: 27, name: "القمر", start: 7, end: 27 },
+    { id: 520, juz: 27, name: "القمر", start: 28, end: 49 },
+    { id: 521, juz: 27, name: "القمر/الرحمن", start: 50, end: 16 },
+    { id: 522, juz: 27, name: "الرحمن", start: 17, end: 40 },
+    { id: 523, juz: 27, name: "الرحمن", start: 41, end: 78 },
+    { id: 524, juz: 27, name: "الواقعة", start: 1, end: 16 },
+    { id: 525, juz: 27, name: "الواقعة", start: 17, end: 50 },
+    { id: 526, juz: 27, name: "الواقعة", start: 51, end: 76 },
+    { id: 527, juz: 27, name: "الواقعة/الحديد", start: 77, end: 3 },
+    { id: 528, juz: 27, name: "الحديد", start: 4, end: 11 },
+    { id: 529, juz: 27, name: "الحديد", start: 12, end: 18 },
+    { id: 530, juz: 27, name: "الحديد", start: 19, end: 24 },
+    { id: 531, juz: 27, name: "الحديد", start: 25, end: 29 },
+
+    // --- جزء ۲۸ ---
+    { id: 532, juz: 28, name: "المجادلة", start: 1, end: 6 },
+    { id: 533, juz: 28, name: "المجادلة", start: 7, end: 11 },
+    { id: 534, juz: 28, name: "المجادلة/الحشر", start: 12, end: 3 },
+    { id: 535, juz: 28, name: "الحشر", start: 4, end: 9 },
+    { id: 536, juz: 28, name: "الحشر", start: 10, end: 16 },
+    { id: 537, juz: 28, name: "الحشر/الممتحنة", start: 17, end: 5 },
+    { id: 538, juz: 28, name: "الممتحنة", start: 6, end: 11 },
+    { id: 539, juz: 28, name: "الممتحنة/الصف", start: 12, end: 5 },
+    { id: 540, juz: 28, name: "الصف/الجمعة", start: 6, end: 4 },
+    { id: 541, juz: 28, name: "الجمعة/المنافقون", start: 5, end: 4 },
+    { id: 542, juz: 28, name: "المنافقون/التغابن", start: 5, end: 9 },
+    { id: 543, juz: 28, name: "التغابن", start: 10, end: 18 },
+    { id: 544, juz: 28, name: "الطلاق", start: 1, end: 5 },
+    { id: 545, juz: 28, name: "الطلاق/التحريم", start: 6, end: 7 },
+    { id: 546, juz: 28, name: "التحريم", start: 8, end: 12 },
+
+    // --- جزء ۲۹ ---
+    { id: 547, juz: 29, name: "الملک", start: 1, end: 12 },
+    { id: 548, juz: 29, name: "الملک", start: 13, end: 26 },
+    { id: 549, juz: 29, name: "الملک/القلم", start: 27, end: 15 },
+    { id: 550, juz: 29, name: "القلم", start: 16, end: 42 },
+    { id: 551, juz: 29, name: "القلم/الحاقة", start: 43, end: 8 },
+    { id: 552, juz: 29, name: "الحاقة", start: 9, end: 34 },
+    { id: 553, juz: 29, name: "الحاقة/المعارج", start: 35, end: 10 },
+    { id: 554, juz: 29, name: "المعارج", start: 11, end: 39 },
+    { id: 555, juz: 29, name: "المعارج/نوح", start: 40, end: 20 },
+    { id: 556, juz: 29, name: "نوح/الجن", start: 21, end: 13 },
+    { id: 557, juz: 29, name: "الجن", start: 14, end: 28 },
+    { id: 558, juz: 29, name: "المزمل", start: 1, end: 19 },
+    { id: 559, juz: 29, name: "المزمل/المدثر", start: 20, end: 31 },
+    { id: 560, juz: 29, name: "المدثر", start: 32, end: 56 },
+    { id: 561, juz: 29, name: "القيامة/الإنسان", start: 1, end: 5 },
+    { id: 562, juz: 29, name: "الإنسان", start: 6, end: 25 },
+    { id: 563, juz: 29, name: "الإنسان/المرسلات", start: 26, end: 19 },
+    { id: 564, juz: 29, name: "المرسلات", start: 20, end: 50 },
+
+    // --- جزء ۳۰ ---
+   { id: 582, juz: 30, name: "النبأ", start: 1, end: 30 },
+    { id: 583, juz: 30, name: "النبأ/النازعات", start: 31, end: 15 },
+    { id: 584, juz: 30, name: "النازعات", start: 16, end: 46 },
+    { id: 585, juz: 30, name: "عبس", start: 1, end: 42 },
+    { id: 586, juz: 30, name: "التکوير", start: 1, end: 29 },
+    { id: 587, juz: 30, name: "الإنفطار/المطففين", start: 1, end: 6 },
+    { id: 588, juz: 30, name: "المطففين", start: 7, end: 34 },
+    { id: 589, juz: 30, name: "المطففين/الإنشقاق", start: 35, end: 25 },
+    { id: 590, juz: 30, name: "البروج", start: 1, end: 22 },
+    { id: 591, juz: 30, name: "الطارق/الأعلى", start: 1, end: 19 },
+    { id: 592, juz: 30, name: "الغاشية/الفجر", start: 1, end: 13 },
+    { id: 593, juz: 30, name: "الفجر", start: 14, end: 30 },
+    { id: 594, juz: 30, name: "البلد/الشمس", start: 1, end: 15 },
+    { id: 595, juz: 30, name: "الليل/الضحى", start: 1, end: 11 },
+    { id: 596, juz: 30, name: "الشرح/التين/العلق", start: 1, end: 8 },
+    { id: 597, juz: 30, name: "العلق/القدر", start: 9, end: 5 },
+    { id: 598, juz: 30, name: "البينة", start: 1, end: 8 },
+    { id: 599, juz: 30, name: "الزلزلة/العاديات", start: 1, end: 11 },
+    { id: 600, juz: 30, name: "القارية/التكاثر", start: 1, end: 8 },
+    { id: 601, juz: 30, name: "العصر/الهمزة/الفيل", start: 1, end: 5 },
+    { id: 602, juz: 30, name: "قريش/الماعون/الكوثر", start: 1, end: 3 },
+    { id: 603, juz: 30, name: "الكافرون/النصر/المسد", start: 1, end: 5 },
+    { id: 604, juz: 30, name: "الإخلاص/الفلق/الناس", start: 1, end: 6 }
+];
+
+// بقیه کدها (تابع loadPages) که قبلاً داشتی زیر این براکت آخر باشد.
 function loadPages() {
     const container = document.getElementById('pages-list');
-    if (!container || container.innerHTML !== "") return; 
+    if (container.innerHTML !== "") return;
 
-    for (let i = 1; i <= 604; i++) {
-        const item = document.createElement('div');
-        item.className = 'item-row';
-        item.style.cursor = "pointer"; // برای اطمینان از نمایش حالت کلیک
-        item.innerHTML = `<span>صفحه ${i}</span> <span>←</span>`;
-        
-        item.addEventListener('click', function() {
-            showPageOptions(i);
-        });
-        container.appendChild(item);
-    }
-}
+    let currentJuz = null;
 
-function showPageOptions(pageNumber) {
-    // لاگ گرفتن در کنسول برای تست (F12 را بزن و ببین این چاپ می‌شود یا نه)
-    console.log("صفحه انتخاب شد: " + pageNumber);
-
-    const tg = window.Telegram.WebApp;
-
-    // اگر در تلگرام بود
-    if (tg.initData && tg.initData !== "") {
-        tg.showPopup({
-            title: `صفحه ${pageNumber}`,
-            message: `انتخاب بستر:`,
-            buttons: [
-                {id: 'yt', type: 'default', text: 'YouTube'},
-                {id: 'tg', type: 'default', text: 'Telegram'},
-                {id: 'cancel', type: 'destructive', text: 'بستن'}
-            ]
-        }, (id) => {
-            if (id === 'yt') tg.openLink("YOUR_LINK_YT_" + pageNumber);
-            if (id === 'tg') tg.openTelegramLink("YOUR_LINK_TG_" + pageNumber);
-        });
-    } else {
-        // اگر در گیت‌هاب (مرورگر PC) بودی، این حتماً باید اجرا شود
-        const userChoice = confirm("تست در مرورگر:\nآیا می‌خواهید لینک‌های صفحه " + pageNumber + " را ببینید؟");
-        if(userChoice) {
-            alert("لینک یوتیوب: YOUR_LINK_YT_" + pageNumber);
+    pagesData.forEach(page => {
+        if (page.juz !== currentJuz) {
+            currentJuz = page.juz;
+            const header = document.createElement('div');
+            header.className = 'juz-header';
+            header.innerHTML = `جزء ${currentJuz.toLocaleString('fa-IR')}`;
+            container.appendChild(header);
         }
-    }
-}
 
-// معرفی توابع به پنجره اصلی برای اطمینان از دسترسی در فایل index.html
-window.loadPages = loadPages;
-window.showPageOptions = showPageOptions;
+        const item = document.createElement('div');
+        item.className = 'page-item';
+        item.innerHTML = `
+            <div class="info">
+                <span class="page-title">صفحه ${page.id.toLocaleString('fa-IR')}</span>
+                <span class="page-sub">${page.name} ${page.start} تا ${page.end}</span>
+            </div>
+            <span class="arrow-icon">▼</span>
+        `;
+
+        const links = document.createElement('div');
+        links.className = 'links-container';
+        
+        // چیدمان دوقسمتی لینک‌ها
+        links.innerHTML = `
+            <div class="link-column">
+                <a href="#" class="btn-link" style="background:#24A1DE">تلگرام 4K</a>
+                <a href="#" class="btn-link" style="background:#24A1DE">تلگرام FHD</a>
+                <a href="#" class="btn-link" style="background:#24A1DE">تلگرام HD</a>
+            </div>
+            <div class="link-column">
+                <a href="#" class="btn-link" style="background:#8b0000">مشاهده در یوتیوب</a>
+            </div>
+        `;
+
+        item.onclick = function() {
+            document.querySelectorAll('.page-item').forEach(el => el.classList.remove('selected'));
+            item.classList.add('selected');
+
+            const isVisible = links.style.display === 'flex';
+            document.querySelectorAll('.links-container').forEach(el => el.style.display = 'none');
+            links.style.display = isVisible ? 'none' : 'flex';
+        };
+
+        container.appendChild(item);
+        container.appendChild(links);
+    });
+}
