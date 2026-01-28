@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>سنی گرافیک</title>
     
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;700&display=swap" rel="stylesheet">
@@ -39,7 +41,6 @@
             padding-bottom: 100px;
         }
 
-        /* استایل کارت‌ها */
         .card {
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(15px);
@@ -114,10 +115,7 @@
             position: relative;
         }
 
-        .nav ul li {
-            flex: 1;
-            height: 70px;
-        }
+        .nav ul li { flex: 1; height: 70px; }
 
         .nav ul li a {
             display: flex;
@@ -192,28 +190,28 @@
     <div class="content-area">
         <div id="card-0" class="card active">
             <h2>سنی گرافیک</h2>
-            <p>ربات قرآنی سنی گرافیک طراحی شده تا دسترسی به صفحات و اجزاء قرآن را با کیفیت‌های مختلف، همراه با لینک یوتیوب و تلگرام برای کاربران فراهم کند.</p>
+            <p>ربات قرآنی سنی گرافیک طراحی شده تا دسترسی به صفحات و اجزاء قرآن را با کیفیت‌های مختلف فراهم کند.</p>
             <p>کلیپ‌های تولیدی بدون لوگو و با کیفیت 4K است تا در محصولات دینی استفاده شوند.</p>
         </div>
 
         <div id="card-1" class="card">
             <h2>انتخاب صفحه</h2>
-            <p>در این بخش می‌توانید صفحه مورد نظر خود از قرآن کریم را انتخاب کنید تا کلیپ مربوط به آن با کیفیت عالی برای شما نمایش داده شود.</p>
+            <p>در این بخش می‌توانید صفحه مورد نظر خود از قرآن کریم را انتخاب کنید تا کلیپ مربوط به آن نمایش داده شود.</p>
         </div>
 
         <div id="card-2" class="card">
             <h2>انتخاب جزء</h2>
-            <p>دسترسی سریع به تمامی ۳۰ جزء قرآن کریم. با انتخاب هر جزء، می‌توانید تلاوت‌ها و محتوای گرافیکی مربوط به آن را دریافت کنید.</p>
+            <p>دسترسی سریع به تمامی ۳۰ جزء قرآن کریم برای دریافت تلاوت‌ها و محتوای گرافیکی.</p>
         </div>
 
         <div id="card-3" class="card">
             <h2>تنظیمات</h2>
-            <p>در این بخش می‌توانید تنظیمات مربوط به نمایش، انتخاب قاری و کیفیت پیش‌فرض ویدیوها را مطابق سلیقه خود تغییر دهید.</p>
+            <p>در این بخش می‌توانید تنظیمات مربوط به نمایش و انتخاب قاری را تغییر دهید.</p>
         </div>
 
         <div id="card-4" class="card">
             <h2>درباره ما</h2>
-            <p>مجموعه سنی گرافیک در تلاش است تا زیباترین جلوه‌های بصری را با کلام وحی در آمیزد. با ما در تلگرام و یوتیوب همراه باشید.</p>
+            <p>مجموعه سنی گرافیک در تلاش است تا زیباترین جلوه‌های بصری را با کلام وحی در آمیزد.</p>
         </div>
     </div>
 
@@ -233,7 +231,16 @@
     <svg style="display:none;"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" /><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" /><feBlend in="SourceGraphic" in2="goo" /></filter></defs></svg>
 
     <script>
+        // مقداردهی اولیه تلگرام
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand(); // باز کردن کامل مینی‌اپ در موبایل
+        tg.headerColor = '#0e1621'; // ست کردن رنگ بالای صفحه تلگرام
+
         function move(index) {
+            // ایجاد لرزش ملایم هنگام کلیک (Haptic Feedback)
+            tg.HapticFeedback.impactOccurred('light');
+
             const list = document.querySelectorAll('.list');
             const cards = document.querySelectorAll('.card');
             
