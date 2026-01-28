@@ -13,7 +13,7 @@
         :root {
             --bg-body: #0e1621;
             --menu-color: #ffffff;
-            --gold: #FFD700;
+            --اصفر: #FFD700;
             --font-main: 'Vazirmatn', sans-serif;
             --icon-size: 26px; 
         }
@@ -23,7 +23,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* تغییر از 100vh برای جلوگیری از پرش در موبایل */
+            min-height: 100vh;
             overflow-x: hidden;
             font-family: var(--font-main);
             color: white;
@@ -36,15 +36,16 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            padding-bottom: 100px; /* فاصله برای اینکه محتوا پشت منو نرود */
+            padding-bottom: 100px;
         }
 
-        .home-card {
+        /* استایل کارت‌ها */
+        .card {
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-right: 5px solid var(--gold); 
+            border-right: 5px solid var(--اصفر); 
             padding: 30px;
             border-radius: 24px;
             max-width: 380px;
@@ -54,17 +55,17 @@
             animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48) forwards;
         }
 
-        .home-card.active { display: block; }
+        .card.active { display: block; }
 
-        .home-card h2 {
-            color: var(--gold);
+        .card h2 {
+            color: var(--اصفر);
             font-size: 1.7rem;
             margin: 0 0 20px 0;
             font-weight: 700;
             text-align: right;
         }
 
-        .home-card p {
+        .card p {
             line-height: 1.9;
             font-size: 1.05rem;
             font-weight: 300;
@@ -80,11 +81,10 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* --- اعمال پوزیشن ثابت فقط روی نگهدارنده منو --- */
         .nav-wrapper {
             filter: url('#goo');
-            position: fixed; /* فیکس کردن منو */
-            bottom: 0;      /* چسباندن به کف */
+            position: fixed;
+            bottom: 0;
             left: 0;
             right: 0;
             width: 100%;
@@ -93,10 +93,9 @@
             display: flex;
             justify-content: center;
             z-index: 1000;
-            padding-bottom: env(safe-area-inset-bottom); /* رعایت حاشیه سیستم در موبایل */
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
-        /* از اینجا به بعد دقیقاً کد شماست بدون تغییر */
         .nav {
             width: 90%;
             height: 70px;
@@ -176,7 +175,7 @@
             content: '';
             width: 60px;
             height: 60px;
-            background: var(--gold);
+            background: var(--اصفر);
             border-radius: 50%;
             box-shadow: 0 0 0 8px var(--menu-color);
         }
@@ -191,14 +190,30 @@
 <body>
 
     <div class="content-area">
-        <div id="home-content" class="home-card active">
+        <div id="card-0" class="card active">
             <h2>سنی گرافیک</h2>
-            <p>
-                ربات قرآنی سنی گرافیک طراحی شده تا دسترسی به صفحات و اجزاء قرآن را با کیفیت‌های مختلف، همراه با لینک یوتیوب و تلگرام (قابل دانلود) برای کاربران فراهم کند.
-            </p>
-            <p>
-                کلیپ‌های تولیدی مجموعه سنی گرافیک بدون لوگو و با کیفیت 4K است تا مسلمانان گرامی بتوانند از این کلیپ‌های قرآنی در محصولات دینی خود استفاده کنند.
-            </p>
+            <p>ربات قرآنی سنی گرافیک طراحی شده تا دسترسی به صفحات و اجزاء قرآن را با کیفیت‌های مختلف، همراه با لینک یوتیوب و تلگرام برای کاربران فراهم کند.</p>
+            <p>کلیپ‌های تولیدی بدون لوگو و با کیفیت 4K است تا در محصولات دینی استفاده شوند.</p>
+        </div>
+
+        <div id="card-1" class="card">
+            <h2>انتخاب صفحه</h2>
+            <p>در این بخش می‌توانید صفحه مورد نظر خود از قرآن کریم را انتخاب کنید تا کلیپ مربوط به آن با کیفیت عالی برای شما نمایش داده شود.</p>
+        </div>
+
+        <div id="card-2" class="card">
+            <h2>انتخاب جزء</h2>
+            <p>دسترسی سریع به تمامی ۳۰ جزء قرآن کریم. با انتخاب هر جزء، می‌توانید تلاوت‌ها و محتوای گرافیکی مربوط به آن را دریافت کنید.</p>
+        </div>
+
+        <div id="card-3" class="card">
+            <h2>تنظیمات</h2>
+            <p>در این بخش می‌توانید تنظیمات مربوط به نمایش، انتخاب قاری و کیفیت پیش‌فرض ویدیوها را مطابق سلیقه خود تغییر دهید.</p>
+        </div>
+
+        <div id="card-4" class="card">
+            <h2>درباره ما</h2>
+            <p>مجموعه سنی گرافیک در تلاش است تا زیباترین جلوه‌های بصری را با کلام وحی در آمیزد. با ما در تلگرام و یوتیوب همراه باشید.</p>
         </div>
     </div>
 
@@ -220,14 +235,13 @@
     <script>
         function move(index) {
             const list = document.querySelectorAll('.list');
-            const homeCard = document.getElementById('home-content');
+            const cards = document.querySelectorAll('.card');
+            
             list.forEach(item => item.classList.remove('active'));
             list[index].classList.add('active');
-            if(index === 0) {
-                homeCard.classList.add('active');
-            } else {
-                homeCard.classList.remove('active');
-            }
+
+            cards.forEach(card => card.classList.remove('active'));
+            document.getElementById('card-' + index).classList.add('active');
         }
     </script>
 </body>
