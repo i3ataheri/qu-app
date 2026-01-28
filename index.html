@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             font-family: var(--font-main);
             color: white;
             -webkit-tap-highlight-color: transparent;
@@ -47,35 +47,71 @@
             -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-right: 5px solid var(--اصفر); 
-            padding: 30px;
+            padding: 25px;
             border-radius: 24px;
-            max-width: 380px;
             width: 85%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            max-width: 380px;
             display: none;
             animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48) forwards;
         }
 
         .card.active { display: block; }
 
-        .card h2 {
-            color: var(--اصفر);
-            font-size: 1.7rem;
-            margin: 0 0 20px 0;
-            font-weight: 700;
-            text-align: right;
+        .quran-scroll {
+            max-height: 350px;
+            overflow-y: auto;
+            margin-top: 10px;
+            padding-left: 5px;
         }
 
-        .card p {
-            line-height: 1.9;
-            font-size: 1.05rem;
-            font-weight: 300;
-            color: #f0f0f0;
-            margin: 0 0 15px 0;
-            text-align: justify;
-            text-justify: inter-word;
-            text-align-last: right;
+        .juz-title {
+            color: var(--اصفر);
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+            margin: 15px 0 10px 0;
+            display: block;
         }
+
+        .page-item {
+            background: rgba(255,255,255,0.05);
+            margin-bottom: 8px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .page-header {
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            background: rgba(255,255,255,0.08);
+            font-size: 0.95rem;
+        }
+
+        .links-drawer {
+            display: none;
+            padding: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .link-group { display: flex; flex-direction: column; gap: 6px; }
+        .group-label { font-size: 0.75rem; color: #fff; margin-bottom: 5px; font-weight: bold; text-align: center; }
+
+        .btn-link {
+            padding: 7px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.1);
+            transition: 0.2s;
+        }
+
+        .btn-link:active { background: var(--اصفر); color: #000; }
 
         @keyframes popIn {
             0% { opacity: 0; transform: scale(0.9) translateY(20px); }
@@ -83,100 +119,19 @@
         }
 
         .nav-wrapper {
-            filter: url('#goo');
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            z-index: 1000;
-            padding-bottom: env(safe-area-inset-bottom);
+            filter: url('#goo'); position: fixed; bottom: 0; left: 0; right: 0;
+            width: 100%; max-width: 400px; margin: 0 auto; display: flex; justify-content: center; z-index: 1000;
         }
-
-        .nav {
-            width: 90%;
-            height: 70px;
-            background: var(--menu-color);
-            border-radius: 25px 25px 0 0;
-            position: relative;
-        }
-
-        .nav ul {
-            display: flex;
-            width: 100%;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            z-index: 20;
-            position: relative;
-        }
-
+        .nav { width: 90%; height: 70px; background: var(--menu-color); border-radius: 25px 25px 0 0; position: relative; }
+        .nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
         .nav ul li { flex: 1; height: 70px; }
-
-        .nav ul li a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .icon-svg {
-            width: var(--icon-size);
-            height: var(--icon-size);
-            color: #555;
-            transition: 0.5s;
-            z-index: 30;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .list.active a .icon-svg {
-            transform: translateY(-40px);
-            color: #000;
-        }
-
-        .text {
-            position: absolute;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #333;
-            transition: 0.5s;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .list.active a .text {
-            opacity: 1;
-            transform: translateY(15px);
-        }
-
-        .indicator {
-            position: absolute;
-            top: -35px;
-            width: 20%;
-            display: flex;
-            justify-content: center;
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: transparent;
-        }
-
-        .indicator::after {
-            content: '';
-            width: 60px;
-            height: 60px;
-            background: var(--اصفر);
-            border-radius: 50%;
-            box-shadow: 0 0 0 8px var(--menu-color);
-        }
+        .nav ul li a { display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100%; cursor: pointer; }
+        .icon-svg { width: var(--icon-size); height: var(--icon-size); color: #555; transition: 0.5s; z-index: 20; }
+        .list.active a .icon-svg { transform: translateY(-35px); color: #000; }
+        .text { position: absolute; font-size: 0.75rem; font-weight: 700; color: #333; transition: 0.5s; opacity: 0; transform: translateY(20px); }
+        .list.active a .text { opacity: 1; transform: translateY(15px); }
+        .indicator { position: absolute; top: -35px; width: 20%; display: flex; justify-content: center; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .indicator::after { content: ''; width: 60px; height: 60px; background: var(--اصفر); border-radius: 50%; box-shadow: 0 0 0 8px var(--menu-color); }
         
         .list:nth-child(1).active ~ .indicator { right: 0%; }
         .list:nth-child(2).active ~ .indicator { right: 20%; }
@@ -190,39 +145,88 @@
     <div class="content-area">
         <div id="card-0" class="card active">
             <h2>سنی گرافیک</h2>
-            <p>ربات قرآنی سنی گرافیک طراحی شده تا دسترسی به صفحات و اجزاء قرآن را با کیفیت‌های مختلف فراهم کند.</p>
-            <p>کلیپ‌های تولیدی بدون لوگو و با کیفیت 4K است تا در محصولات دینی استفاده شوند.</p>
+            <p>خوش آمدید. محتوای ویدئویی قرآن کریم را در تب «صفحه» مشاهده کنید.</p>
         </div>
 
         <div id="card-1" class="card">
             <h2>انتخاب صفحه</h2>
-            <p>در این بخش می‌توانید صفحه مورد نظر خود از قرآن کریم را انتخاب کنید تا کلیپ مربوط به آن نمایش داده شود.</p>
+            <div class="quran-scroll">
+                
+                <span class="juz-title">جزء اول</span>
+
+                <div class="page-item">
+                    <div class="page-header" onclick="toggleLinks(1)">
+                        <span>صفحه ۱ (فاتحه ۱ تا ۷)</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="links-1" class="links-drawer">
+                        <div class="link-group">
+                            <span class="group-label">یوتیوب</span>
+                            <a href="#" class="btn-link">مشاهده</a>
+                        </div>
+                        <div class="link-group">
+                            <span class="group-label">تلگرام</span>
+                            <a href="#" class="btn-link">4K</a>
+                            <a href="#" class="btn-link">FHD</a>
+                            <a href="#" class="btn-link">HD</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-header" onclick="toggleLinks(2)">
+                        <span>صفحه ۲ (بقره ۱ تا ۵)</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="links-2" class="links-drawer">
+                        <div class="link-group">
+                            <span class="group-label">یوتیوب</span>
+                            <a href="#" class="btn-link">مشاهده</a>
+                        </div>
+                        <div class="link-group">
+                            <span class="group-label">تلگرام</span>
+                            <a href="#" class="btn-link">4K</a>
+                            <a href="#" class="btn-link">FHD</a>
+                            <a href="#" class="btn-link">HD</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-item">
+                    <div class="page-header" onclick="toggleLinks(3)">
+                        <span>صفحه ۳ (بقره ۶ تا ۱۶)</span>
+                        <span>▼</span>
+                    </div>
+                    <div id="links-3" class="links-drawer">
+                        <div class="link-group">
+                            <span class="group-label">یوتیوب</span>
+                            <a href="#" class="btn-link">مشاهده</a>
+                        </div>
+                        <div class="link-group">
+                            <span class="group-label">تلگرام</span>
+                            <a href="#" class="btn-link">4K</a>
+                            <a href="#" class="btn-link">FHD</a>
+                            <a href="#" class="btn-link">HD</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div id="card-2" class="card">
-            <h2>انتخاب جزء</h2>
-            <p>دسترسی سریع به تمامی ۳۰ جزء قرآن کریم برای دریافت تلاوت‌ها و محتوای گرافیکی.</p>
-        </div>
-
-        <div id="card-3" class="card">
-            <h2>تنظیمات</h2>
-            <p>در این بخش می‌توانید تنظیمات مربوط به نمایش و انتخاب قاری را تغییر دهید.</p>
-        </div>
-
-        <div id="card-4" class="card">
-            <h2>درباره ما</h2>
-            <p>مجموعه سنی گرافیک در تلاش است تا زیباترین جلوه‌های بصری را با کلام وحی در آمیزد.</p>
-        </div>
+        <div id="card-2" class="card"><h2>انتخاب جزء</h2></div>
+        <div id="card-3" class="card"><h2>تنظیمات</h2></div>
+        <div id="card-4" class="card"><h2>درباره ما</h2></div>
     </div>
 
     <div class="nav-wrapper">
         <div class="nav">
             <ul>
-                <li class="list active" onclick="move(0)"><a><div class="icon-svg"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 19v-8.5a1 1 0 0 0-.4-.8l-7-5.25a1 1 0 0 0-1.2 0l-7 5.25a1 1 0 0 0-.4.8V19a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1"/></svg></div><span class="text">خانه</span></a></li>
-                <li class="list" onclick="move(1)"><a><div class="icon-svg"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9.8V20m0-10.2c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.31-1.311C14.28 5 15.12 5 16.8 5h2.6c.56 0 .84 0 1.054.109c.188.096.34.249.437.437C21 5.76 21 6.04 21 6.6v8.8c0 .56 0 .84-.11 1.054a1 1 0 0 1-.436.437c-.213.109-.493.109-1.052.109h-2.833c-.939 0-1.41 0-1.836.13a3 3 0 0 0-1.032.552c-.344.283-.605.674-1.126 1.455L12 20m0-10.2c0-1.68 0-2.52-.327-3.162a3 3 0 0 0-1.311-1.311C9.72 5 8.88 5 7.2 5H4.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C3 5.76 3 6.04 3 6.6v8.8c0 .56 0 .84.109 1.054a1 1 0 0 0 .437.437C3.76 17 4.039 17 4.598 17h2.833c.939 0 1.408 0 1.835.13c.377.114.73.302 1.034.552c.343.282.602.67 1.118 1.446L12 20"/></svg></div><span class="text">صفحه</span></a></li>
-                <li class="list" onclick="move(2)"><a><div class="icon-svg"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19.5V6.2c0-1.12 0-1.68.218-2.108c.192-.377.497-.682.874-.874C6.52 3 7.08 3 8.2 3h9.2c.56 0 .84 0 1.055.109a1 1 0 0 1 .436.437C19 3.76 19 4.04 19 4.6v11.8c0 .56 0 .84-.11 1.054a1 1 0 0 1-.435.437C18.24 18 17.96 18 17.402 18H7.25A2.25 2.25 0 0 0 5 20.25c0 .414.336.75.75.75h10.652c.559 0 .84 0 1.053-.109a1 1 0 0 0 .436-.437C18 20.24 18 19.96 18 19.4V18"/></svg></div><span class="text">جزء</span></a></li>
-                <li class="list" onclick="move(3)"><a><div class="icon-svg"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m20.35 8.923l-.366-.204l-.113-.064a2 2 0 0 1-.67-.66c-.018-.027-.034-.056-.066-.112a2 2 0 0 1-.3-1.157l.006-.425c.012-.68.018-1.022-.078-1.328a2 2 0 0 0-.417-.736c-.214-.24-.511-.412-1.106-.754l-.494-.285c-.592-.341-.889-.512-1.204-.577a2 2 0 0 0-.843.007c-.313.07-.606.246-1.191.596l-.003.002l-.354.211c-.056.034-.085.05-.113.066c-.278.155-.588.24-.907.25c-.032.002-.065.002-.13.002l-.13-.001a2 2 0 0 1-.91-.252c-.028-.015-.055-.032-.111-.066l-.357-.214c-.589-.354-.884-.53-1.199-.601a2 2 0 0 0-.846-.006c-.316.066-.612.238-1.205.582l-.003.001l-.488.283l-.005.004c-.588.34-.883.512-1.095.751a2 2 0 0 0-.415.734c-.095.307-.09.649-.078 1.333l.007.424c0 .065.003.097.002.128a2 2 0 0 1-.301 1.027c-.033.056-.048.084-.065.11a2 2 0 0 1-.675.664l-.112.063l-.361.2c-.602.333-.903.5-1.121.738a2 2 0 0 0-.43.73c-.1.307-.1.65-.099 1.338l.002.563c.001.683.003 1.024.104 1.329a2 2 0 0 0 .427.726c.218.236.516.402 1.113.734l.358.199c.061.034.092.05.121.068a2 2 0 0 1 .74.781l.067.12a2 2 0 0 1 .23 1.038l-.007.407c-.012.686-.017 1.03.079 1.337c.085.272.227.523.417.736c.214.24.512.411 1.106.754l.494.285c.593.341.889.512 1.204.577a2 2 0 0 0 .843-.007c.314-.07.607-.246 1.194-.598l.354-.212l.113-.066c.278-.154.588-.24.907-.25l.13-.001h.13c.318.01.63.097.91.252l.092.055l.376.226c.59.354.884.53 1.199.6a2 2 0 0 0 .846.008c.315-.066.613-.239 1.206-.583l.495-.287c.588-.342.883-.513 1.095-.752c.19-.213.33-.463.415-.734c.095-.305.09-.644.078-1.318l-.008-.44v-.127a2 2 0 0 1 .3-1.028l.065-.11a2 2 0 0 1 .675-.664l.11-.061l.002-.001l.361-.2c.602-.334.903-.5 1.122-.738c.194-.21.34-.46.429-.73c.1-.305.1-.647.098-1.327l-.002-.574c-.001-.683-.002-1.025-.103-1.33a2 2 0 0 0-.428-.725c-.217-.236-.515-.402-1.111-.733z"/><path d="M8 12a4 4 0 1 0 8 0a4 4 0 0 0-8 0"/></g></svg></div><span class="text">تنظیمات</span></a></li>
-                <li class="list" onclick="move(4)"><a><div class="icon-svg"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.146 9.074a2.998 2.998 0 0 1 5.28-.838A3 3 0 0 1 12 13v1m0 7a9 9 0 1 1 0-18a9 9 0 0 1 0 18m.05-4v.1h-.1V17z"/></svg></div><span class="text">درباره ما</span></a></li>
+                <li class="list active" onclick="move(0)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><span class="text">خانه</span></a></li>
+                <li class="list" onclick="move(1)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg></div><span class="text">صفحه</span></a></li>
+                <li class="list" onclick="move(2)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div><span class="text">جزء</span></a></li>
+                <li class="list" onclick="move(3)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div><span class="text">تنظیمات</span></a></li>
+                <li class="list" onclick="move(4)"><a><div class="icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg></div><span class="text">درباره</span></a></li>
                 <div class="indicator"></div>
             </ul>
         </div>
@@ -231,26 +235,28 @@
     <svg style="display:none;"><defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" /><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="goo" /><feBlend in="SourceGraphic" in2="goo" /></filter></defs></svg>
 
     <script>
-        // مقداردهی اولیه تلگرام
         const tg = window.Telegram.WebApp;
         tg.ready();
-        tg.expand(); // باز کردن کامل مینی‌اپ در موبایل
-        tg.headerColor = '#0e1621'; // ست کردن رنگ بالای صفحه تلگرام
+        tg.expand();
+        tg.headerColor = '#0e1621';
 
         function move(index) {
-            // ایجاد لرزش ملایم هنگام کلیک (Haptic Feedback)
             tg.HapticFeedback.impactOccurred('light');
-
-            const list = document.querySelectorAll('.list');
-            const cards = document.querySelectorAll('.card');
-            
-            list.forEach(item => item.classList.remove('active'));
-            list[index].classList.add('active');
-
-            cards.forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.list').forEach(li => li.classList.remove('active'));
+            document.querySelectorAll('.list')[index].classList.add('active');
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
             document.getElementById('card-' + index).classList.add('active');
+        }
+
+        function toggleLinks(id) {
+            const drawer = document.getElementById('links-' + id);
+            const isVisible = drawer.style.display === 'grid';
+            document.querySelectorAll('.links-drawer').forEach(d => d.style.display = 'none');
+            if (!isVisible) {
+                drawer.style.display = 'grid';
+                tg.HapticFeedback.impactOccurred('medium');
+            }
         }
     </script>
 </body>
 </html>
-
