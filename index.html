@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>سنی گرافیک</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,23 +23,22 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh; /* تغییر از 100vh برای جلوگیری از پرش در موبایل */
+            overflow-x: hidden;
             font-family: var(--font-main);
             color: white;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* بخش محتوای اصلی */
         .content-area {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            padding-bottom: 100px; /* فاصله برای اینکه محتوا پشت منو نرود */
         }
 
-        /* کارت صفحه خانه */
         .home-card {
             background: rgba(255, 255, 255, 0.07);
             backdrop-filter: blur(15px);
@@ -51,13 +50,11 @@
             max-width: 380px;
             width: 85%;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            display: none; /* در ابتدا مخفی */
+            display: none;
             animation: popIn 0.5s cubic-bezier(0.26, 0.53, 0.74, 1.48) forwards;
         }
 
-        .home-card.active {
-            display: block;
-        }
+        .home-card.active { display: block; }
 
         .home-card h2 {
             color: var(--gold);
@@ -73,16 +70,9 @@
             font-weight: 300;
             color: #f0f0f0;
             margin: 0 0 15px 0;
-            
-            /* تنظیمات تراز متن - حل مشکل کشیدگی خط آخر */
             text-align: justify;
             text-justify: inter-word;
             text-align-last: right;
-            -moz-text-align-last: right;
-        }
-
-        .home-card p:last-child {
-            margin-bottom: 0;
         }
 
         @keyframes popIn {
@@ -90,16 +80,23 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* --- استایل‌های منوی ناوبری --- */
+        /* --- اعمال پوزیشن ثابت فقط روی نگهدارنده منو --- */
         .nav-wrapper {
             filter: url('#goo');
-            margin: 0 auto 0;
+            position: fixed; /* فیکس کردن منو */
+            bottom: 0;      /* چسباندن به کف */
+            left: 0;
+            right: 0;
             width: 100%;
             max-width: 400px;
+            margin: 0 auto;
             display: flex;
             justify-content: center;
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom); /* رعایت حاشیه سیستم در موبایل */
         }
 
+        /* از اینجا به بعد دقیقاً کد شماست بدون تغییر */
         .nav {
             width: 90%;
             height: 70px;
@@ -184,7 +181,6 @@
             box-shadow: 0 0 0 8px var(--menu-color);
         }
         
-        /* مکان‌های ایندیکیتور */
         .list:nth-child(1).active ~ .indicator { right: 0%; }
         .list:nth-child(2).active ~ .indicator { right: 20%; }
         .list:nth-child(3).active ~ .indicator { right: 40%; }
@@ -225,17 +221,12 @@
         function move(index) {
             const list = document.querySelectorAll('.list');
             const homeCard = document.getElementById('home-content');
-            
-            // تغییر وضعیت دکمه‌های منو
             list.forEach(item => item.classList.remove('active'));
             list[index].classList.add('active');
-
-            // نمایش یا مخفی کردن کارت خانه
             if(index === 0) {
                 homeCard.classList.add('active');
             } else {
                 homeCard.classList.remove('active');
-                // در اینجا می‌توانید برای سایر ایندکس‌ها (1، 2 و...) محتوای دیگری تعریف کنید
             }
         }
     </script>
