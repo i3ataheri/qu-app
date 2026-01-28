@@ -6,9 +6,6 @@
     <title>سنی گرافیک</title>
     
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;700&display=swap" rel="stylesheet">
 
     <style>
@@ -17,7 +14,8 @@
             --menu-color: #ffffff;
             --اصفر: #FFD700;
             --font-main: 'Vazirmatn', sans-serif;
-            --icon-size: 26px; 
+            --yt-red: #FF0000;
+            --tg-blue: #24A1DE;
         }
 
         body {
@@ -58,7 +56,7 @@
         .card.active { display: block; }
 
         .quran-scroll {
-            max-height: 350px;
+            max-height: 380px;
             overflow-y: auto;
             margin-top: 10px;
             padding-left: 5px;
@@ -71,6 +69,7 @@
             padding-bottom: 5px;
             margin: 15px 0 10px 0;
             display: block;
+            text-align: center;
         }
 
         .page-item {
@@ -86,38 +85,41 @@
             justify-content: space-between;
             cursor: pointer;
             background: rgba(255,255,255,0.08);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .links-drawer {
             display: none;
-            padding: 12px;
+            padding: 15px;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             background: rgba(0, 0, 0, 0.3);
         }
 
-        .link-group { display: flex; flex-direction: column; gap: 6px; }
-        .group-label { font-size: 0.75rem; color: #fff; margin-bottom: 5px; font-weight: bold; text-align: center; }
+        .link-group { display: flex; flex-direction: column; gap: 8px; }
+        .group-label { font-size: 0.8rem; color: #fff; margin-bottom: 2px; font-weight: bold; text-align: center; }
 
         .btn-link {
-            padding: 7px;
+            padding: 8px;
             border-radius: 8px;
             text-align: center;
             font-size: 0.8rem;
             color: white;
             text-decoration: none;
             background: rgba(255,255,255,0.1);
-            transition: 0.2s;
+            transition: 0.1s;
         }
 
-        .btn-link:active { background: var(--اصفر); color: #000; }
+        /* رنگ‌های رسمی موقع کلیک */
+        .yt-btn:active { background: var(--yt-red) !important; color: white; }
+        .tg-btn:active { background: var(--tg-blue) !important; color: white; }
 
         @keyframes popIn {
             0% { opacity: 0; transform: scale(0.9) translateY(20px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
+        /* منوی پایین */
         .nav-wrapper {
             filter: url('#goo'); position: fixed; bottom: 0; left: 0; right: 0;
             width: 100%; max-width: 400px; margin: 0 auto; display: flex; justify-content: center; z-index: 1000;
@@ -126,7 +128,7 @@
         .nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
         .nav ul li { flex: 1; height: 70px; }
         .nav ul li a { display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100%; cursor: pointer; }
-        .icon-svg { width: var(--icon-size); height: var(--icon-size); color: #555; transition: 0.5s; z-index: 20; }
+        .icon-svg { width: 26px; height: 26px; color: #555; transition: 0.5s; z-index: 20; }
         .list.active a .icon-svg { transform: translateY(-35px); color: #000; }
         .text { position: absolute; font-size: 0.75rem; font-weight: 700; color: #333; transition: 0.5s; opacity: 0; transform: translateY(20px); }
         .list.active a .text { opacity: 1; transform: translateY(15px); }
@@ -145,7 +147,7 @@
     <div class="content-area">
         <div id="card-0" class="card active">
             <h2>سنی گرافیک</h2>
-            <p>خوش آمدید. محتوای ویدئویی قرآن کریم را در تب «صفحه» مشاهده کنید.</p>
+            <p>خوش آمدید. برای دریافت محتوا به بخش «صفحه» بروید.</p>
         </div>
 
         <div id="card-1" class="card">
@@ -162,13 +164,13 @@
                     <div id="links-1" class="links-drawer">
                         <div class="link-group">
                             <span class="group-label">یوتیوب</span>
-                            <a href="#" class="btn-link">مشاهده</a>
+                            <a href="https://youtu.be/CDRt0X9nGc0" class="btn-link yt-btn">مشاهده</a>
                         </div>
                         <div class="link-group">
                             <span class="group-label">تلگرام</span>
-                            <a href="#" class="btn-link">4K</a>
-                            <a href="#" class="btn-link">FHD</a>
-                            <a href="#" class="btn-link">HD</a>
+                            <a href="https://t.me/sunnigfx/56" class="btn-link tg-btn">4K</a>
+                            <a href="https://t.me/sunnigfx/57" class="btn-link tg-btn">FHD</a>
+                            <a href="https://t.me/sunnigfx/58" class="btn-link tg-btn">HD</a>
                         </div>
                     </div>
                 </div>
@@ -181,13 +183,13 @@
                     <div id="links-2" class="links-drawer">
                         <div class="link-group">
                             <span class="group-label">یوتیوب</span>
-                            <a href="#" class="btn-link">مشاهده</a>
+                            <a href="#" class="btn-link yt-btn">مشاهده</a>
                         </div>
                         <div class="link-group">
                             <span class="group-label">تلگرام</span>
-                            <a href="#" class="btn-link">4K</a>
-                            <a href="#" class="btn-link">FHD</a>
-                            <a href="#" class="btn-link">HD</a>
+                            <a href="#" class="btn-link tg-btn">4K</a>
+                            <a href="#" class="btn-link tg-btn">FHD</a>
+                            <a href="#" class="btn-link tg-btn">HD</a>
                         </div>
                     </div>
                 </div>
@@ -200,13 +202,13 @@
                     <div id="links-3" class="links-drawer">
                         <div class="link-group">
                             <span class="group-label">یوتیوب</span>
-                            <a href="#" class="btn-link">مشاهده</a>
+                            <a href="#" class="btn-link yt-btn">مشاهده</a>
                         </div>
                         <div class="link-group">
                             <span class="group-label">تلگرام</span>
-                            <a href="#" class="btn-link">4K</a>
-                            <a href="#" class="btn-link">FHD</a>
-                            <a href="#" class="btn-link">HD</a>
+                            <a href="#" class="btn-link tg-btn">4K</a>
+                            <a href="#" class="btn-link tg-btn">FHD</a>
+                            <a href="#" class="btn-link tg-btn">HD</a>
                         </div>
                     </div>
                 </div>
@@ -238,7 +240,6 @@
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-        tg.headerColor = '#0e1621';
 
         function move(index) {
             tg.HapticFeedback.impactOccurred('light');
