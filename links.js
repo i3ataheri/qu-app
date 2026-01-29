@@ -1,0 +1,23 @@
+window.allLinks = {
+    1: { tg_4k: "https://t.me/sunnigfx/56", tg_fhd: "https://t.me/sunnigfx/57", tg_hd: "https://t.me/sunnigfx/58", yt: "https://youtu.be/CDRt0X9nGc0" },
+    2: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    3: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    4: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    5: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    6: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    7: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    8: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    9: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    10: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    11: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    12: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    13: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    14: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    15: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    16: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    17: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    18: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    19: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    20: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" },
+    21: { tg_4k: "YOUR_LINK", tg_fhd: "YOUR_LINK", tg_hd: "YOUR_LINK", yt: "YOUR_LINK" }
+};
