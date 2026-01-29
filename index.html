@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
-        /* آیکون‌های اجتماعی */
         .social-row {
             display: flex;
             justify-content: center;
@@ -25,7 +24,7 @@
         .social-btn {
             color: white;
             filter: grayscale(100%);
-            transition: all 0.3s ease; /* انیمیشن نرم‌تر */
+            transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -33,24 +32,19 @@
             opacity: 0.7;
         }
 
-        /* تغییر حالت وقتی موس روی آیکون می‌رود (Hover) و وقتی لمس می‌شود (Active) */
         .social-btn:hover, .social-btn:active {
             filter: grayscale(0%);
             transform: scale(1.15);
             opacity: 1;
         }
 
-        /* رنگ‌های اختصاصی در حالت Hover و Active */
         .insta:hover, .insta:active { color: #ec0075 !important; }
         .youtube:hover, .youtube:active { color: #ee0f0f !important; }
         .tiktok:hover, .tiktok:active { color: #ff00e7 !important; }
         .share:hover, .share:active { color: #fdcc00 !important; }
         .report:hover, .report:active { color: #f07167 !important; }
         
-        .social-btn svg {
-            width: 32px;
-            height: 32px;
-        }
+        .social-btn svg { width: 32px; height: 32px; }
     </style>
 </head>
 <body>
@@ -85,7 +79,7 @@
                         <svg viewBox="0 0 448 512" fill="currentColor"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.29V0h88a121.18 121.18 0 0 0 1.86 22.32A126.11 126.11 0 0 0 393.98 80a121.18 121.18 0 0 0 54 22.32z"/></svg>
                     </a>
 
-                    <a href="javascript:void(0)" onclick="tg.shareToChat('ربات سنی گرافیک را معرفی کنید:\nhttps://t.me/SunniGFX_Bot')" class="social-btn share">
+                    <a href="javascript:void(0)" onclick="shareApp()" class="social-btn share">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                     </a>
 
@@ -136,6 +130,27 @@
             list[index].classList.add('active');
             cards.forEach(card => card.classList.remove('active'));
             document.getElementById(`card-${index}`).classList.add('active');
+        }
+
+        function shareApp() {
+            const shareText = `🌟 تلاوت‌های باکیفیت سنی گرافیک (4K)
+
+در سنی گرافیک کلام وحی را با بالاترین کیفیت و بدون واترمارک تماشا کنید.
+
+🔗 راه‌های ارتباطی ما:
+📱 اینستاگرام: https://www.instagram.com/sunnigfx
+📺 یوتیوب: https://www.youtube.com/@SunniGFX
+🎵 تیک‌تاک: https://www.tiktok.com/@sunnigfx
+📢 کانال تلگرام: https://t.me/sunnigfx
+🤖 ربات هوشمند: https://t.me/SunniGFX_Bot
+
+"دعای خیر شما سرمایه ماست"`;
+
+            if (tg.shareToChat) {
+                tg.shareToChat(shareText);
+            } else {
+                alert("این قابلیت فقط در تلگرام فعال است.");
+            }
         }
     </script>
 </body>
