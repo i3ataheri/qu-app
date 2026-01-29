@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
+        /* استایل دکمه‌های اجتماعی */
         .social-row {
             display: flex;
             justify-content: center;
@@ -30,8 +31,10 @@
             align-items: center;
             justify-content: center;
             opacity: 0.7;
+            cursor: pointer;
         }
 
+        /* افکت تغییر رنگ با موس و لمس */
         .social-btn:hover, .social-btn:active {
             filter: grayscale(0%);
             transform: scale(1.15);
@@ -133,6 +136,7 @@
         }
 
         function shareApp() {
+            // متن جامع با تمام لینک‌ها
             const shareText = `🌟 تلاوت‌های باکیفیت سنی گرافیک (4K)
 
 در سنی گرافیک کلام وحی را با بالاترین کیفیت و بدون واترمارک تماشا کنید.
@@ -146,10 +150,13 @@
 
 "دعای خیر شما سرمایه ماست"`;
 
-            if (tg.shareToChat) {
-                tg.shareToChat(shareText);
+            // استفاده از سیستم Deep Link تلگرام برای پایداری ۱۰۰٪
+            const shareUrl = 'https://t.me/share/url?url=' + encodeURIComponent('https://t.me/SunniGFX_Bot') + '&text=' + encodeURIComponent(shareText);
+            
+            if (tg.openTelegramLink) {
+                tg.openTelegramLink(shareUrl);
             } else {
-                alert("این قابلیت فقط در تلگرام فعال است.");
+                window.open(shareUrl, '_blank');
             }
         }
     </script>
