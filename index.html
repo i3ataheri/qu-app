@@ -124,25 +124,27 @@
             if(index === 1 && typeof loadPages === 'function') loadPages();
         }
 
-        // اشتراک‌گذاری همگانی (واتس‌اپ، فیس‌بوک و غیره در موبایل)
         async function shareApp() {
-            tg.HapticFeedback.impactOccurred('medium');
-            const shareData = {
-                title: 'سنی گرافیک',
-                text: 'تلاوت‌های باکیفیت 4K بدون واترمارک',
-                url: 'https://t.me/SunniGFX_Bot'
-            };
+    tg.HapticFeedback.impactOccurred('medium');
+    const shareData = {
+        title: 'سنی گرافیک',
+        text: 'تلاوت‌های باکیفیت 4K بدون واترمارک در سُنّی‌گرافیک',
+        url: 'https://t.me/SunniGFX_Bot'
+    };
 
-            if (navigator.share) {
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(shareData.url));
-                }
-            } else {
-                tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(shareData.url));
-            }
+    // اگر کاربر روی موبایل باشد، این دستور منوی اشتراک‌گذاری گوشی (واتس‌اپ، فیس‌بوک و غیره) را باز می‌کند
+    if (navigator.share) {
+        try {
+            await navigator.share(shareData);
+        } catch (err) {
+            // اگر به هر دلیلی منوی گوشی باز نشد (مثلاً کاربر کنسل کرد)، سیستم شیر تلگرام باز شود
+            tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(shareData.url) + "&text=" + encodeURIComponent(shareData.text));
         }
+    } else {
+        // برای نسخه دسکتاپ و کامپیوتر، مستقیم به سیستم شیر تلگرام می‌رود
+        tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(shareData.url) + "&text=" + encodeURIComponent(shareData.text));
+    }
+}
     </script>
 </body>
 </html>
