@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;700&display=swap" rel="stylesheet">
     
     <style>
-        /* استایل دکمه‌های اجتماعی */
         .social-row {
             display: flex;
             justify-content: center;
@@ -34,7 +33,6 @@
             cursor: pointer;
         }
 
-        /* افکت تغییر رنگ با موس و لمس */
         .social-btn:hover, .social-btn:active {
             filter: grayscale(0%);
             transform: scale(1.15);
@@ -135,28 +133,28 @@
             document.getElementById(`card-${index}`).classList.add('active');
         }
 
-        function shareApp() {
-            // متن جامع با تمام لینک‌ها
-            const shareText = `🌟 تلاوت‌های باکیفیت سنی گرافیک (4K)
+        async function shareApp() {
+            const shareData = {
+                title: 'سنی گرافیک',
+                text: `🌟 تلاوت‌های باکیفیت سنی گرافیک (4K)\n\nدر سنی گرافیک کلام وحی را با بالاترین کیفیت تماشا کنید.\n\n📱 اینستاگرام: https://www.instagram.com/sunnigfx\n📺 یوتیوب: https://www.youtube.com/@SunniGFX\n🎵 تیک‌تاک: https://www.tiktok.com/@sunnigfx\n📢 تلگرام: https://t.me/sunnigfx\n🤖 ربات: https://t.me/SunniGFX_Bot`,
+                url: 'https://t.me/SunniGFX_Bot'
+            };
 
-در سنی گرافیک کلام وحی را با بالاترین کیفیت و بدون واترمارک تماشا کنید.
-
-🔗 راه‌های ارتباطی ما:
-📱 اینستاگرام: https://www.instagram.com/sunnigfx
-📺 یوتیوب: https://www.youtube.com/@SunniGFX
-🎵 تیک‌تاک: https://www.tiktok.com/@sunnigfx
-📢 کانال تلگرام: https://t.me/sunnigfx
-🤖 ربات هوشمند: https://t.me/SunniGFX_Bot
-
-"دعای خیر شما سرمایه ماست"`;
-
-            // استفاده از سیستم Deep Link تلگرام برای پایداری ۱۰۰٪
-            const shareUrl = 'https://t.me/share/url?url=' + encodeURIComponent('https://t.me/SunniGFX_Bot') + '&text=' + encodeURIComponent(shareText);
-            
-            if (tg.openTelegramLink) {
-                tg.openTelegramLink(shareUrl);
-            } else {
-                window.open(shareUrl, '_blank');
+            try {
+                // اگر مرورگر از منوی اشتراک‌گذاری موبایل پشتیبانی کند (واتس‌اپ، فیس‌بوک و غیره)
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // اگر در دسکتاپ بود، از اشتراک‌گذار تلگرام استفاده کن
+                    const shareUrl = 'https://t.me/share/url?url=' + encodeURIComponent(shareData.url) + '&text=' + encodeURIComponent(shareData.text);
+                    if (tg.openTelegramLink) {
+                        tg.openTelegramLink(shareUrl);
+                    } else {
+                        window.open(shareUrl, '_blank');
+                    }
+                }
+            } catch (err) {
+                console.log('خطا در اشتراک‌گذاری:', err);
             }
         }
     </script>
