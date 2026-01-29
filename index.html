@@ -124,27 +124,53 @@
             if(index === 1 && typeof loadPages === 'function') loadPages();
         }
 
-        async function shareApp() {
+       async function shareApp() {
     tg.HapticFeedback.impactOccurred('medium');
-    const shareData = {
-        title: 'سنی گرافیک',
-        text: 'تلاوت‌های باکیفیت 4K بدون واترمارک در سُنّی‌گرافیک',
-        url: 'https://t.me/SunniGFX_Bot'
-    };
 
-    // اگر کاربر روی موبایل باشد، این دستور منوی اشتراک‌گذاری گوشی (واتس‌اپ، فیس‌بوک و غیره) را باز می‌کند
+    const home = document.querySelector(".home-content");
+    if (!home) return;
+
+    let text = home.innerText.trim();
+
+    // لینک‌ها
+    const links = [
+        "اینستاگرام: https://instagram.com/sunnigfx",
+        "یوتیوب: https://youtube.com/@sunnigfx",
+        "تلگرام: https://t.me/sunnigfx"
+    ];
+
+    text += "\n\nشبکه‌های اجتماعی:\n" + links.join("\n");
+
+    // محیط تلگرام
+    if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.openTelegramLink(
+            "https://t.me/share/url?url=" +
+            encodeURIComponent("https://t.me/SunniGFX_Bot") +
+            "&text=" + encodeURIComponent(text)
+        );
+        return;
+    }
+
+    // موبایل
     if (navigator.share) {
         try {
-            await navigator.share(shareData);
-        } catch (err) {
-            // اگر به هر دلیلی منوی گوشی باز نشد (مثلاً کاربر کنسل کرد)، سیستم شیر تلگرام باز شود
-            tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(shareData.url) + "&text=" + encodeURIComponent(shareData.text));
+            await navigator.share({ text });
+        } catch (e) {
+            window.open(
+                "https://t.me/share/url?text=" + encodeURIComponent(text),
+                "_blank"
+            );
         }
-    } else {
-        // برای نسخه دسکتاپ و کامپیوتر، مستقیم به سیستم شیر تلگرام می‌رود
-        tg.openTelegramLink("https://t.me/share/url?url=" + encodeURIComponent(shareData.url) + "&text=" + encodeURIComponent(shareData.text));
+    } 
+    // دسکتاپ
+    else {
+        window.open(
+            "https://t.me/share/url?text=" + encodeURIComponent(text),
+            "_blank"
+        );
     }
 }
+
     </script>
 </body>
 </html>
