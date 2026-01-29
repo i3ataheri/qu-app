@@ -641,8 +641,6 @@ const pagesData = [
     { id: 603, juz: 30, name: "الكافرون/النصر/المسد", start: 1, end: 5 },
     { id: 604, juz: 30, name: "الإخلاص/الفلق/الناس", start: 1, end: 6 }
 ];
-
-// بقیه کدها (تابع loadPages) که قبلاً داشتی زیر این براکت آخر باشد.
 function loadPages() {
     const container = document.getElementById('pages-list');
     if (container.innerHTML !== "") return;
@@ -650,6 +648,7 @@ function loadPages() {
     let currentJuz = null;
 
     pagesData.forEach(page => {
+        // ایجاد هدر جزء
         if (page.juz !== currentJuz) {
             currentJuz = page.juz;
             const header = document.createElement('div');
@@ -658,38 +657,49 @@ function loadPages() {
             container.appendChild(header);
         }
 
+        // ایجاد آیتم صفحه
         const item = document.createElement('div');
         item.className = 'page-item';
         item.innerHTML = `
             <div class="info">
                 <span class="page-title">صفحه ${page.id.toLocaleString('fa-IR')}</span>
-                <span class="page-sub">${page.name} ${page.start} تا ${page.end}</span>
+                <span class="page-sub">${page.name} ${page.start.toLocaleString('fa-IR')} تا ${page.end.toLocaleString('fa-IR')}</span>
             </div>
             <span class="arrow-icon">▼</span>
         `;
 
+        // دریافت لینک‌ها از فایل links.js بر اساس ID صفحه
+        // اگر لینکی تعریف نشده باشد، دکمه به بالای صفحه (#) می‌رود
+        const pageLinks = (window.allLinks && window.allLinks[page.id]) || { tg_4k: "#", tg_fhd: "#", tg_hd: "#", yt: "#" };
+
         const links = document.createElement('div');
         links.className = 'links-container';
+        links.style.display = 'none'; // در ابتدا پنهان باشد
         
-        // چیدمان دوقسمتی لینک‌ها
+        // چیدمان دوقسمتی لینک‌ها با استفاده از متغیرهای فایل links.js
         links.innerHTML = `
             <div class="link-column">
-                <a href="#" class="btn-link" style="background:#24A1DE">تلگرام 4K</a>
-                <a href="#" class="btn-link" style="background:#24A1DE">تلگرام FHD</a>
-                <a href="#" class="btn-link" style="background:#24A1DE">تلگرام HD</a>
+                <a href="${pageLinks.tg_4k}" target="_blank" class="btn-link" style="background:#0088cc">تلگرام 4K</a>
+                <a href="${pageLinks.tg_fhd}" target="_blank" class="btn-link" style="background:#229ED9">تلگرام FHD</a>
+                <a href="${pageLinks.tg_hd}" target="_blank" class="btn-link" style="background:#32afed">تلگرام HD</a>
             </div>
             <div class="link-column">
-                <a href="#" class="btn-link" style="background:#8b0000">مشاهده در یوتیوب</a>
+                <a href="${pageLinks.yt}" target="_blank" class="btn-link" style="background:#bb0000">مشاهده در یوتیوب</a>
             </div>
         `;
 
+        // مدیریت کلیک برای باز و بسته شدن
         item.onclick = function() {
-            document.querySelectorAll('.page-item').forEach(el => el.classList.remove('selected'));
-            item.classList.add('selected');
-
             const isVisible = links.style.display === 'flex';
+            
+            // بستن بقیه لینک‌های باز شده
             document.querySelectorAll('.links-container').forEach(el => el.style.display = 'none');
-            links.style.display = isVisible ? 'none' : 'flex';
+            document.querySelectorAll('.page-item').forEach(el => el.classList.remove('selected'));
+
+            if (!isVisible) {
+                links.style.display = 'flex';
+                item.classList.add('selected');
+            }
         };
 
         container.appendChild(item);
